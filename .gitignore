@@ -1,0 +1,9 @@
+/.vs
+/NowApi/bin/
+/NowApi/obj/
+/Task.Application/bin/
+/Task.Application/obj/
+/Task.Domain/bin/
+/Task.Domain/obj/
+/Task.Persistance/bin/
+/Task.Persistance/obj/
