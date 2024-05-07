@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.AreaServices.Command.DeleteIndustryCommand
+namespace Application.Services.IndustryServices.Command.DeleteIndustryCommand
 {
-    public class DeleteIndustryResponse
+    public record DeleteIndustryResponse
     {
+        public string Message { get; set; }
     }
 }

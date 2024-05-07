@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.AreaServices.Command.UpdateIndustryCommand
+namespace Application.Services.IndustryServices.Command.UpdateIndustryCommand
 {
-    public class UpdateIndustryResponse
+    public record UpdateIndustryResponse
     {
+        public string Message { get; set; }
     }
 }

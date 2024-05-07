@@ -17,6 +17,7 @@ namespace Persistance.Services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAreaRepository, AreaRepository>();
+            services.AddScoped<IIndustryRepository, IndustryRepository>();
         }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Domain.Entities;
 
-namespace Application.Services.AreaServices.Command.UpdateIndustryCommand
+namespace Application.Services.IndustryServices.Command.UpdateIndustryCommand
 {
-    internal class UpdateIndustryMapper
+    public class UpdateIndustryMapper : Profile
     {
+        public UpdateIndustryMapper()
+        {
+            CreateMap<UpdateIndustryRequest, Industry>();
+        }
     }
 }

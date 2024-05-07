@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Application.Services.AreaServices.Command.AddAreaCommand;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.AreaServices.Command.AddIndustryCommand
+namespace Application.Services.IndustryServices.Command.AddIndustryCommand
 {
-    public class AddIndustryRequest
-    {
-    }
+    public record AddIndustryRequest(string Name, string Description = "", bool IsActive = false) : IRequest<AddIndustryResponse>;
+    
 }
