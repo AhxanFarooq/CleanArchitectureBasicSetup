@@ -8,5 +8,7 @@ namespace Application.Services.AreaServices.Command.AddContactCommand
 {
     public class AddContactResponse
     {
+        public Guid Id { get; set; }
+        public string Message { get; set; }
     }
 }

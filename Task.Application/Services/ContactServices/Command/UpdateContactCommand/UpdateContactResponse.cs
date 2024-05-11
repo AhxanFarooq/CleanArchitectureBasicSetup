@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services.AreaServices.Command.UpdateContactCommand
 {
-    public class UpdateContactResponse
+    public record UpdateContactResponse
     {
+        public string Message { get; set; }
     }
 }

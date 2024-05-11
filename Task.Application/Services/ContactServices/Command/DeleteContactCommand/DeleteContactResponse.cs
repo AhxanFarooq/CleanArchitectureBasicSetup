@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services.AreaServices.Command.DeleteContactCommand
 {
-    public class DeleteContactResponse
+    public record DeleteContactResponse
     {
+        public string Message { get; set; }
     }
 }
