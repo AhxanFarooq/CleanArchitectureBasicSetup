@@ -16,6 +16,9 @@ namespace Persistance.Services
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAreaRepository, AreaRepository>();
+            services.AddScoped<IIndustryRepository, IndustryRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
     }
 }
