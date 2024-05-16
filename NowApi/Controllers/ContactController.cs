@@ -63,7 +63,7 @@ namespace NowApi.Controllers
 
         // PUT api/<ContactController>/5
         [Route("Update")]
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult<UpdateContactResponse>> UpdateIndustry(UpdateContactRequest request,
             CancellationToken cancellationToken)
         {
