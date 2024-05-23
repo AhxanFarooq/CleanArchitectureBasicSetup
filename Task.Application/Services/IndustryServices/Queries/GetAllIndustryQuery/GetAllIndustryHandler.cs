@@ -2,6 +2,7 @@
 using Application.Repositories;
 using Application.Services.IndustryServices.Command.GetAllIndustryQuery;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,15 @@ namespace Application.Services.IndustryServices.Command.GetAllIndustryQuery
         {
             try
             {
-                var list = await _industryRepository.GetAll(cancellationToken);
+                List<Industry> list;
+                if (string.IsNullOrEmpty(request.Search))
+                {
+                    list = await _industryRepository.GetAll(cancellationToken);
+                }
+                else
+                {
+                    list = await _industryRepository.SearchByIndustry(request.Search, cancellationToken);
+                }
                 return _mapper.Map<List<GetAllIndustryResponse>>(list);
             }
             catch (Exception ex)

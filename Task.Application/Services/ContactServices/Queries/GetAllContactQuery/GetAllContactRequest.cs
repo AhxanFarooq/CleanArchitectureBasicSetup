@@ -9,6 +9,6 @@ namespace Application.Services.AreaServices.Command.GetAllContactQuery
 {
     public record GetAllContactRequest:IRequest<List<GetAllContactResponse>>
     {
-        
+        public string? Search { get; set; }
     }
 }

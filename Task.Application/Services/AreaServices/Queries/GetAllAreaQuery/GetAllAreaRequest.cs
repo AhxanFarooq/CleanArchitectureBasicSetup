@@ -9,5 +9,6 @@ namespace Application.Services.AreaServices.Command.GetAllAreaQuery
 {
     public record GetAllAreaRequest:IRequest<List<GetAllAreaResponse>>
     {
+        public string? Search { get; set; }
     }
 }

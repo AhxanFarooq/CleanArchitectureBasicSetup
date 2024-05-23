@@ -3,6 +3,7 @@ using Application.Repositories;
 using Application.Services.AreaServices.Command.GetAllContactQuery;
 using Application.Services.ContactServices.Command.GetAllContactQuery;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,15 @@ namespace Application.Services.ContactServices.Command.GetAllContactQuery
         {
             try
             {
-                var list = await _contactRepository.GetAllContactWithDetail(cancellationToken);
+                List<Contact> list;
+                if (string.IsNullOrEmpty(request.Search))
+                {
+                    list = await _contactRepository.GetAllContactWithDetail(cancellationToken);
+                }
+                else
+                {
+                    list = await _contactRepository.Search(request.Search, cancellationToken);
+                }
                 return list.Select(x=>new GetAllContactResponse()
                 {
                     Id = x.Id,

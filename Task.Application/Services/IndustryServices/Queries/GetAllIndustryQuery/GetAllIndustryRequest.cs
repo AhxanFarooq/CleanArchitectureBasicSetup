@@ -10,5 +10,6 @@ namespace Application.Services.IndustryServices.Command.GetAllIndustryQuery
 {
     public record GetAllIndustryRequest : IRequest<List<GetAllIndustryResponse>>
     {
+        public string? Search { get; set; }
     }
 }

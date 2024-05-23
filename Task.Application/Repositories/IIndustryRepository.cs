@@ -10,5 +10,6 @@ namespace Application.Repositories
     public interface IIndustryRepository : IBaseRepository<Industry>
     {
         Task<bool> VerifyAlreadyExist(string name, CancellationToken cancellationToken);
+        Task<List<Industry>> SearchByIndustry(string search, CancellationToken cancellationToken);
     }
 }

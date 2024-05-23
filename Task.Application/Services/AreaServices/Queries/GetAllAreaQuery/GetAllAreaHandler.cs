@@ -1,6 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,16 @@ namespace Application.Services.AreaServices.Command.GetAllAreaQuery
         {
             try
             {
-                var list = await _areaRepository.GetAll(cancellationToken);
+                List<Area> list;
+                if (string.IsNullOrEmpty(request.Search))
+                {
+                    list = await _areaRepository.GetAll(cancellationToken);
+                }
+                else
+                {
+                    list = await _areaRepository.SearchByArea(request.Search,cancellationToken);
+                }
+
                 return _mapper.Map<List<GetAllAreaResponse>>(list);
             }
             catch (Exception ex)

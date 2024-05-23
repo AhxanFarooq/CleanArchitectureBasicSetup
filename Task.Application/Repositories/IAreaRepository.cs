@@ -10,5 +10,6 @@ namespace Application.Repositories
     public interface IAreaRepository : IBaseRepository<Area>
     {
         Task<bool> VerifyAlreadyExist(string name, CancellationToken cancellationToken);
+        Task<List<Area>> SearchByArea(string search, CancellationToken cancellationToken);
     }
 }

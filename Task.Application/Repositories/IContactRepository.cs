@@ -12,5 +12,6 @@ namespace Application.Repositories
         Task<bool> VerifyAlreadyExist(string companyTitle, CancellationToken cancellationToken);
         Task<Contact> GetContactByIdWithDetail(Guid id, CancellationToken cancellationToken);
         Task<List<Contact>> GetAllContactWithDetail( CancellationToken cancellationToken);
+        Task<List<Contact>> Search(string search, CancellationToken cancellationToken);
     }
 }

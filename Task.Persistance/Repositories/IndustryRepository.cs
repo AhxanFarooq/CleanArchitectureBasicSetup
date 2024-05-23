@@ -14,6 +14,11 @@ namespace Persistance.Repositories
     {
         public IndustryRepository(ApplicationDbContext context) : base(context) { }
 
+        public Task<List<Industry>> SearchByIndustry(string search, CancellationToken cancellationToken)
+        {
+            return _context.Set<Industry>().Where(a => a.Name.Contains(search)).ToListAsync(cancellationToken);
+        }
+
         public Task<bool> VerifyAlreadyExist(string name, CancellationToken cancellationToken)
         {
             return _context.Industries.AnyAsync(x => x.Name.ToLower() == name.ToLower(), cancellationToken);
