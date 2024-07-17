@@ -7,3 +7,5 @@
 /Task.Domain/obj/
 /Task.Persistance/bin/
 /Task.Persistance/obj/
+/App/node_modules
+/App/.angular

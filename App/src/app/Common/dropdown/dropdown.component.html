@@ -1,0 +1,4 @@
+<label  class="form-label" *ngIf="showLabel">{{label}}</label>
+<select class="form-select" [(ngModel)]="selectedValue" aria-placeholder="Select" (change)="onChange($event)">
+    <option *ngFor="let item of items" [value]="item.id">{{ item.name }}</option>
+</select>

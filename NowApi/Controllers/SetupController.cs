@@ -88,24 +88,9 @@ namespace NowApi.Controllers
         /// <summary>
         /// Search area by its name.
         /// </summary>
-        /// <param name="search">The name of the item to fetch record.</param>
-        /// <param name="pageIndex">Provide page index.</param>
-        /// <param name="totalPages">Provide total number of pages.</param>
-        /// <returns>A response indicating success or failure.</returns>
-        public async Task<ActionResult<PaginatedResponse<GetAllAreaResponse>>> SearchArea(CancellationToken cancellationToken, string search,int pageIndex =1, int totalPages = 10)
-        {
-            var response = await _mediator.Send(new GetAllAreaRequest() { Search = search, PageIndex = pageIndex, TotalSize = totalPages }, cancellationToken);
-            return response;
-        }
-
-        [Route("Area/Search")]
-        [HttpGet]
-        /// <summary>
-        /// Search area by its name.
-        /// </summary>
         /// <param name="id">The name of the item to fetch record.</param>
         /// <returns>A response indicating success or failure.</returns>
-        public async Task<ActionResult<List<GetAllAreaResponse>>> SearchArea(string search,
+        public async Task<ActionResult<PaginatedResponse<GetAllAreaResponse>>> SearchArea(string search,
            CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetAllAreaRequest() { Search = search}, cancellationToken);

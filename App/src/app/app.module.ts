@@ -22,6 +22,9 @@ import { ModalComponent } from './Common/modal/modal.component';
 import { InputComponent } from './Common/input/input.component';
 import { TextareaComponent } from './Common/textarea/textarea.component';
 import { TableComponent } from './Common/table/table.component';
+import { QuotationComponent } from './MainForm/quotation/quotation.component';
+import { AddQuotationComponent } from './MainForm/quotation/add-quotation/add-quotation.component';
+import { DropdownComponent } from './Common/dropdown/dropdown.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { TableComponent } from './Common/table/table.component';
     ModalComponent,
     InputComponent,
     TextareaComponent,
-    TableComponent
+    TableComponent,
+    QuotationComponent,
+    AddQuotationComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

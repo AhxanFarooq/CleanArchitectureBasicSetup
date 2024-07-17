@@ -10,6 +10,8 @@ import { authGuard } from './guards/auth.guard';
 import { CompanyComponent } from './MainForm/company/company.component';
 import { AddCompanyComponent } from './MainForm/company/add-company/add-company.component';
 import { ProductComponent } from './Setup/product/product.component';
+import { QuotationComponent } from './MainForm/quotation/quotation.component';
+import { AddQuotationComponent } from './MainForm/quotation/add-quotation/add-quotation.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent, canActivate: [authGuard] },
   { path: 'contact', component: CompanyComponent, canActivate: [authGuard] },
   { path: 'addContact', component: AddCompanyComponent, canActivate: [authGuard] },
+  { path: 'quotation', component: QuotationComponent, canActivate: [authGuard] },
+  { path: 'addQuotation', component: AddQuotationComponent, canActivate: [authGuard] },
       // Add more routes as needed
     ]
   },

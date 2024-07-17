@@ -1,6 +1,6 @@
 
 <div class="mb-3">
-    <label [htmlFor]="name" class="form-label">{{labelName}}:</label>
+    <label [htmlFor]="name" class="form-label" *ngIf="showLabel">{{labelName}}:</label>
     <input [type]="type" [name]="name" [placeholder]="placeHolder" 
     (ngModelChange)="onInputChange(name, type, $event)"
     [(ngModel)]="value" class="form-control" [id]="name" >

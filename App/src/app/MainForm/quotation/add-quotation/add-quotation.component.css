@@ -1,0 +1,3 @@
+:host ::ng-deep .text_area textarea{
+    height: 130px;
+}

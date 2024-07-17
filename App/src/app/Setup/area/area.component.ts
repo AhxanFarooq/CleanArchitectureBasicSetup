@@ -107,12 +107,10 @@ export class AreaComponent {
   open(){
           
     if (this.modalElement) {
-      const closeButton = this.modalElement.nativeElement.querySelector('[data-bs-target="modal"]');
-    closeButton.click();
-      // const modal = new bootstrap.Modal(this.modalElement.nativeElement, {
-      //   keyboard: false
-      // });
-      // modal.show();
+      //const closeButton = this.modalElement.nativeElement.querySelector('[data-bs-target="modal"]');
+    //closeButton.click();
+      const modal = new (window as any).bootstrap.Modal(this.modalElement.nativeElement)
+      modal.show();
     } else {
       console.error('Button element not found');
     }
