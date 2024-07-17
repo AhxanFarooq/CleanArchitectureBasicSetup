@@ -3,6 +3,7 @@ using Application.Services.AreaServices.Command.DeleteContactCommand;
 using Application.Services.AreaServices.Command.GetAllContactQuery;
 using Application.Services.AreaServices.Command.GetContactQuery;
 using Application.Services.AreaServices.Command.UpdateContactCommand;
+using Application.Services.Common;
 using Application.Services.IndustryServices.Command.AddIndustryCommand;
 using Application.Services.IndustryServices.Command.DeleteIndustryCommand;
 using Application.Services.IndustryServices.Command.GetAllIndustryQuery;
@@ -29,13 +30,26 @@ namespace NowApi.Controllers
         [Route("GetAll")]
         [HttpGet]
 
-        public async Task<ActionResult<List<GetAllContactResponse>>> GetAll(
-           CancellationToken cancellationToken)
+        public async Task<ActionResult<PaginatedResponse<GetAllContactResponse>>> GetAll(
+           CancellationToken cancellationToken, int pageIndex = 1, int totalPages = 10)
         {
-            var response = await _mediator.Send(new GetAllContactRequest(), cancellationToken);
+            var response = await _mediator.Send(new GetAllContactRequest() { PageIndex = pageIndex, TotalPages = totalPages }, cancellationToken);
             return response;
         }
 
+        [Route("Search")]
+        [HttpGet]
+        /// <summary>
+        /// Search industry by its name.
+        /// </summary>
+        /// <param name="id">The name of the item to fetch record.</param>
+        /// <returns>A response indicating success or failure.</returns>
+        public async Task<ActionResult<PaginatedResponse<GetAllContactResponse>>> Search(string search,
+           CancellationToken cancellationToken, int pageIndex = 1, int totalPages = 10)
+        {
+            var response = await _mediator.Send(new GetAllContactRequest() { Search = search, PageIndex = pageIndex, TotalPages = totalPages }, cancellationToken);
+            return response;
+        }
         /// <summary>
         /// Get an item by its ID.
         /// </summary>

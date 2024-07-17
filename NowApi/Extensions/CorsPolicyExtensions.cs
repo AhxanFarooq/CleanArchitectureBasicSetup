@@ -13,7 +13,7 @@
                         //builder.WithOrigins(Configuration.GetSection("frontend:IpAndServerAddress").Value, "app://.").AllowAnyMethod()
                         //.AllowAnyHeader();
 
-                        builder1.WithOrigins("https://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                        builder1.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
                     });
             });
         }

@@ -1,6 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Repositories;
 using Application.Services.AreaServices.Command.GetAllContactQuery;
+using Application.Services.Common;
 using Application.Services.ContactServices.Command.GetAllContactQuery;
 using AutoMapper;
 using MediatR;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.ContactServices.Command.GetAllContactQuery
 {
-    public class GetAllContactHandler : IRequestHandler<GetAllContactRequest, List<GetAllContactResponse>>
+    public class GetAllContactHandler : IRequestHandler<GetAllContactRequest, PaginatedResponse<GetAllContactResponse>>
     {
         protected readonly IContactRepository _contactRepository;
         protected readonly IMapper _mapper;
@@ -22,12 +23,24 @@ namespace Application.Services.ContactServices.Command.GetAllContactQuery
             _mapper = mapper;
         }
 
-        public async Task<List<GetAllContactResponse>> Handle(GetAllContactRequest request, CancellationToken cancellationToken)
+        public async Task<PaginatedResponse<GetAllContactResponse>> Handle(GetAllContactRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var list = await _contactRepository.GetAllContactWithDetail(cancellationToken);
-                return list.Select(x=>new GetAllContactResponse()
+                List<Contact> list;
+                if (string.IsNullOrEmpty(request.Search))
+                {
+                    list = await _contactRepository.GetAllContactWithDetail(cancellationToken);
+                }
+                else
+                {
+                    list = await _contactRepository.Search(request.Search, cancellationToken);
+                }
+                list = list.OrderBy(x => x.CompanyTitle).ToList();
+                var totalRecord = list.Count;
+                if(request.TotalPages > 0)
+                    list = list.Skip((request.PageIndex - 1) * request.TotalPages).Take(request.TotalPages).ToList();
+                var response =  list.Select(x=>new GetAllContactResponse()
                 {
                     Id = x.Id,
                     CompanyTitle = x.CompanyTitle,
@@ -41,6 +54,7 @@ namespace Application.Services.ContactServices.Command.GetAllContactQuery
                     IndustryId = x.IndustryId,
 
                 }).ToList();
+                return new PaginatedResponse<GetAllContactResponse>(response, request.PageIndex, request.TotalPages, totalRecord);
             }
             catch (Exception ex)
             {

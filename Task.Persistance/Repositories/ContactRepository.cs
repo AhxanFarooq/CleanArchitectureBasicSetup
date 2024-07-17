@@ -24,7 +24,7 @@ namespace Persistance.Repositories
         }
         public Task<List<Contact>> GetAllContactWithDetail( CancellationToken cancellationToken)
         {
-            return _context.Contacts.Include(x=>x.Area).Include(x=>x.Industry).ToListAsync();
+            return _context.Contacts.Include(x=>x.Area).Include(x=>x.Industry).OrderBy(x=>x.CreatedDate).ToListAsync();
         }
     }
 }

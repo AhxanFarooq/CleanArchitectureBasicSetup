@@ -19,6 +19,7 @@ namespace Persistance.Services
             services.AddScoped<IAreaRepository, AreaRepository>();
             services.AddScoped<IIndustryRepository, IndustryRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

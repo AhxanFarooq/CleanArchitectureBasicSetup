@@ -26,7 +26,7 @@ namespace Persistance.Repositories
 
         public Task<List<T>> GetAll(CancellationToken cancellationToken)
         {
-            return _context.Set<T>().ToListAsync(cancellationToken);
+            return _context.Set<T>().OrderBy(x=>x.CreatedDate).ToListAsync(cancellationToken);
         }
 
         public Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
