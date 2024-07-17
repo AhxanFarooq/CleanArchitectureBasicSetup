@@ -14,5 +14,6 @@ namespace Domain.Entities
         public decimal RetailPrice { get; set; }
         public string? Description { get; set; }
         public bool IsActive { get; set; }
+        public virtual ICollection<QuotationItem> QuotationItems { get; set; }
     }
 }

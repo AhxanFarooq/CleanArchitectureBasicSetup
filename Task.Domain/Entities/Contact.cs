@@ -20,5 +20,6 @@ namespace Domain.Entities
         public string? Source { get; set; }
         public virtual ICollection<ContactDetail> ContactDetails { get; set; }
         public virtual ICollection<ContactCoversation> ContactCoversations { get; set; }
+        public virtual ICollection<Quotation> Quotations { get; set; }
     }
 }
