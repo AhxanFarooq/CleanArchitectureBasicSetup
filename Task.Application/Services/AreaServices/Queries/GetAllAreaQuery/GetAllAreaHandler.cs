@@ -2,6 +2,7 @@
 using Application.Repositories;
 using Application.Services.Common;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

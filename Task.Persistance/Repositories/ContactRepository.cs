@@ -26,5 +26,11 @@ namespace Persistance.Repositories
         {
             return _context.Contacts.Include(x=>x.Area).Include(x=>x.Industry).OrderBy(x=>x.CreatedDate).ToListAsync();
         }
+
+        public async Task<List<Contact>> Search(string search, CancellationToken cancellationToken)
+        {
+            var data =  await _context.Set<Contact>().Include(x => x.Area).Include(x => x.Industry).ToListAsync(cancellationToken);
+            return data.Where(a => a.CompanyTitle.ToLower().Contains(search.ToLower()) || a.City.ToLower().Contains(search.ToLower()) || a.Source.ToLower().Contains(search.ToLower()) || a.Area.Name.ToLower().Contains(search.ToLower()) || a.Industry.Name.ToLower().Contains(search.ToLower())).ToList();
+        }
     }
 }

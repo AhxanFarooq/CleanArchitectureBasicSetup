@@ -98,6 +98,20 @@ namespace NowApi.Controllers
             return response;
         }
 
+        [Route("Area/Search")]
+        [HttpGet]
+        /// <summary>
+        /// Search area by its name.
+        /// </summary>
+        /// <param name="id">The name of the item to fetch record.</param>
+        /// <returns>A response indicating success or failure.</returns>
+        public async Task<ActionResult<List<GetAllAreaResponse>>> SearchArea(string search,
+           CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetAllAreaRequest() { Search = search}, cancellationToken);
+            return response;
+        }
+
         /// <summary>
         /// Get an item by its ID.
         /// </summary>

@@ -4,6 +4,7 @@ using Application.Services.AreaServices.Command.GetAllContactQuery;
 using Application.Services.Common;
 using Application.Services.ContactServices.Command.GetAllContactQuery;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

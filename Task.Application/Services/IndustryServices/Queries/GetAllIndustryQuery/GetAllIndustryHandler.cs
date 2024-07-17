@@ -3,6 +3,7 @@ using Application.Repositories;
 using Application.Services.Common;
 using Application.Services.IndustryServices.Command.GetAllIndustryQuery;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
