@@ -1,0 +1,20 @@
+<div class="container-fluid mt-5 row justify-content-center d-flex">
+    <div class="card p-3 col-6 " >
+        <div class="">
+            <h2>Login</h2>
+            <form (ngSubmit)="onLogin()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" [(ngModel)]="userData.username" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" [(ngModel)]="userData.password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <p class="mt-3">Don't have an account? <a routerLink="/signup">Sign up here</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+

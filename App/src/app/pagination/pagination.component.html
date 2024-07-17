@@ -1,0 +1,46 @@
+<!-- <div style="display: flex; flex-direction: column;">
+    <div class="justify-content-start">
+        <span>asdasdas</span>
+    </div>
+    <div class="justify-content-end">
+        <ul class="pagination justify-content-end">
+            <li class="page-item"><a (click)="prevPage()" [ngClass]="{'disabled': !hasPrevPage}" class="page-link" >Previous</a></li>
+            <li class="page-item"><a  class="page-link" >...</a></li>
+            <li class="page-item">
+                <input type="number" class="input_class" (keydown.enter)="openSpecificPage()"  [(ngModel)]="pageNumber">
+            </li>
+            <li class="page-item"><a  class="page-link" >...</a></li>
+          
+            <li class="page-item"><a class="page-link" [ngClass]="{'disabled': !hasNextPage}" (click)="nextPage()" >Next</a></li>
+          </ul>
+    </div>
+</div> -->
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <p>Page <span  style="font-weight: bold;">{{currentPage}}</span> of <span style="font-weight: bold;">{{totalPages}}</span>, with a total of  <span style="font-weight: bold;">{{totalItems}}</span> records</p>
+    </div>
+    <div>
+        <ul class="pagination" style="--bs-pagination-color: #000000;">
+            <li class="page-item"><a (click)="openFirstPage()" [ngClass]="{'disabled': !hasPrevPage}" class="page-link">First</a></li>
+            <li class="page-item"><a (click)="prevPage()" [ngClass]="{'disabled': !hasPrevPage}" class="page-link">Previous</a></li>
+            
+            <li class="page-item"><a class="page-link">...</a></li>
+            <li class="page-item"><a class="page-link" *ngIf="hasPrevPage" (click)="openSelectedPage(this.currentPage-1)">{{this.currentPage-1}}</a></li>
+            <li class="page-item"><a class="page-link" *ngIf="!hasPrevPage">{{this.currentPage}}</a></li>
+            <li class="page-item">
+                <input type="number" class="input_class" (keydown.enter)="openSpecificPage()"  [(ngModel)]="pageNumber">
+            </li>
+            <li class="page-item"><a class="page-link" *ngIf="hasNextPage" (click)="openSelectedPage(this.currentPage+1)">{{this.currentPage + 1}}</a></li>
+            <li class="page-item"><a class="page-link" *ngIf="!hasNextPage">{{this.currentPage }}</a></li>
+            <li class="page-item"><a class="page-link">...</a></li>
+            <!-- Uncomment and modify if needed
+            <li class="page-item" *ngFor="let i of getArrayLenght(data.length) let n = index">
+                <a class="page-link" (click)="getIndex(n)">{{n+1}}</a>
+            </li>
+            -->
+            <li class="page-item"><a class="page-link" [ngClass]="{'disabled': !hasNextPage}" (click)="nextPage()">Next</a></li>
+            <li class="page-item"><a class="page-link" [ngClass]="{'disabled': !hasNextPage}" (click)="openLastPage()">Last</a></li>
+        </ul>
+    </div>
+</div>

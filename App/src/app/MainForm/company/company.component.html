@@ -1,0 +1,53 @@
+<div class="container">
+    <!-- Button trigger modal -->
+  
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-between">
+      <input type="text" style="max-width: 250px; height: 50px;" class="form-control mx-2" id="name" [(ngModel)]="searchValue"  placeholder="Search by company detail" (input)="search()">
+      
+      <button type="button" (click)="AddNew()" class="btn btn-primary m-3" >
+        <i class="fa-solid fa-plus"></i> Add Contact
+      </button>
+      
+    </div>
+  </div>
+  
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">City</th>
+              <th scope="col">Area </th>
+              <th scope="col">Industry</th>
+              <th scope="col">Address</th>
+              <th scope="col">GoogleMap Link</th>
+              <th scope="col">Source</th>
+              <th style="text-align: end;" scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let area of contacts;let i = index">
+              <th style="width: 5%;" scope="row">{{i + 1}}</th>
+              <td style="width: 15%;">{{area.companyTitle}}</td>
+              <td style="width: 10%;">{{area.city}}</td>
+              <td style="width: 10%;">{{area.areaName}}</td>
+              <td style="width: 10%;">{{area.industryName}}</td>
+              <td style="width: 20%;">{{area.address}}</td>
+              <td style="width: 10%;">
+                <a [href]="area.googleMapLink" target="_blank">Navigate to map</a>
+              </td>
+              <td style="width: 10%;">{{area.source}}</td>
+              <td style=" width: 10%;text-align: end;">
+                <div>
+                  <button type="button" class="btn btn-sm btn-secondary me-2" (click)="EditContact(area.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" class="btn btn-sm  btn-danger" (click)="deleteContact(area.id)"><i
+                    class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+        <app-pagination [hasPrevPage]="hasPrevPage" [hasNextPage]="hasNextPage" [totalItems]="totalCount" (pageChanged)="onPageChange($event)"></app-pagination>
+
+  </div>

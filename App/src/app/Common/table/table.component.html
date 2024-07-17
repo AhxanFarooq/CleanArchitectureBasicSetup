@@ -1,0 +1,32 @@
+<table class="table table-striped" style="border: 1px solid #e9ecef; border-radius: 4px;">
+    <thead>
+      <tr>
+        <th scope="col" >#</th>
+        <th scope="col" *ngFor="let column of columns">{{ column.title }}</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data;let i = index">
+            <td style="width: 5%;">{{i + 1}}</td>
+            <td [ngStyle]="{width:column.width}" *ngFor="let column of columns">
+              <ng-container *ngIf="!column.isActionColumn; else actionTemplate">
+                {{ item[column.key] }}
+              </ng-container>
+              <ng-template #actionTemplate >
+                <div style="display: flex;">
+                    <div *ngFor="let button of column.buttons">
+                        <button *ngIf="button === 'edit'" type="button" class="btn btn-sm btn-secondary me-2" 
+                         (click)="onEdit(item)" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i> <!-- Using Font Awesome icons -->
+                          </button>
+                          <button *ngIf="button === 'del'" type="button" class="btn btn-sm  btn-danger" (click)="onDelete(item)" title="Delete">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                    </div>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+  <app-pagination [hasPrevPage]="hasPrevPage" [hasNextPage]="hasNextPage" [totalItems]="totalCount" (pageChanged)="onPageChange($event)"></app-pagination>

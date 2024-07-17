@@ -1,0 +1,143 @@
+<div class="row m-4">
+    <div class="col-lg-4">
+        <label>Company Title: <span class="text-danger"> *</span></label>
+        <input [(ngModel)]="newContact.companyTitle" placeholder="Company Title" class="form-control"
+            type="text">
+    </div>
+    <div class="col-lg-4">
+        <label>City:</label>
+        <select class="form-select" [(ngModel)]="newContact.city" aria-placeholder="Select City">
+            <option *ngFor="let city of cities" [value]="city">{{ city}}</option>
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <label>Area:</label>
+        <select class="form-select" [(ngModel)]="newContact.areaId" aria-placeholder="Select Area">
+            <option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</option>
+        </select>
+        <!-- <input [(ngModel)]="newContact.city" placeholder="Area" class="form-control" type="text"> -->
+    </div>
+    <div class="col-lg-4">
+        <label>Industry:</label>
+        <select class="form-select" [(ngModel)]="newContact.industryId" aria-placeholder="Select Industry">
+            <option *ngFor="let industry of industrys" [value]="industry.id">{{ industry.name }}</option>
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <label>Google Map Link:</label>
+        <input [(ngModel)]="newContact.googleMapLink" placeholder="Google Map Link" class="form-control"
+            type="text">
+    </div>
+    <div class="col-lg-4">
+        <label>Source:</label>
+        <input [(ngModel)]="newContact.source" placeholder="Source" class="form-control" type="text">
+    </div>
+    <div class="col-lg-6">
+        <label>Address:</label>
+        <textarea [(ngModel)]="newContact.address" placeholder="Address" class="form-control"
+            type="text"></textarea>
+    </div>
+</div>
+
+<ul class="nav  nav-tabs m-3">
+    <li class="nav-item">
+        <a class="nav-link" (click)="activeTab = 'tab1'" [class.active]="activeTab === 'tab1'">Contact Conversation</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" (click)="activeTab = 'tab2'" [class.active]="activeTab === 'tab2'">Contact Details</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    
+
+    <!-- TabTwoComponent HTML -->
+    <div id="tab1" class="tab-pane fade m-3" [ngClass]="{'show active': activeTab === 'tab1'}">
+        <!-- Content of Tab Two -->
+
+        <div class="row">
+            <div *ngFor="let inputField of newContact.contactCoversationModels; let i = index" class="input-group mb-3">
+                <input type="text" class="form-control" [(ngModel)]="inputField.note">
+                <button type="button" class="btn btn-danger" (click)="removeConversationField(i)"><i
+                        class="fa-solid fa-trash-can"></i></button>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <button type="button" class="btn btn-primary" (click)="addConversationField()">Add New
+                        Conversation</button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- TabThreeComponent HTML -->
+    <div id="tab2" class="tab-pane fade m-3" [ngClass]="{'show active': activeTab === 'tab2'}">
+        <!-- Content of Tab Three -->
+        <div class="card" *ngFor="let inputField of newContact.contactDetailModels; let i = index" style="margin: inherit;">
+            <div class="card-header ">
+
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-danger" (click)="removeContactDetailField(i)"><i
+                                class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body" >
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Name: </label>
+                        <input [(ngModel)]="inputField.name" placeholder="Name" class="form-control" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Email: </label>
+                        <input [(ngModel)]="inputField.email" placeholder="Email" class="form-control" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Secondary Email: </label>
+                        <input [(ngModel)]="inputField.secondary_Email" placeholder="Secondary Email"
+                            class="form-control" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Phone: </label>
+                        <input [(ngModel)]="inputField.phone" placeholder="Phone" class="form-control" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Secondary Phone: </label>
+                        <input [(ngModel)]="inputField.secondary_Phone" placeholder="Secondary Phone"
+                            class="form-control" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Designation: </label>
+                        <input [(ngModel)]="inputField.designation" placeholder="Designation" class="form-control"
+                            type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" (click)="addContactDetailField()">Add New
+                    Reference</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-end" style="margin: auto;">
+        <div class="col-auto">
+            <button type="button" *ngIf="isEdit" class="btn btn-primary" (click)="UpdateChanges()">
+                Update
+            </button>
+            <button type="button" *ngIf="!isEdit" class="btn btn-primary" (click)="SaveChanges()">
+                Save
+            </button>
+            <button type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="NavigateToList()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

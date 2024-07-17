@@ -1,0 +1,39 @@
+<div class="modal fade" #modalElement id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{formTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div *ngFor="let input of formDetail" [ngClass]="input.classcol">
+                    <app-input *ngIf="validateInputField(input.type)"
+                    [labelName]="input.labelName"
+                    (onInputValueEmit)="onInputValueEmit($event)"
+                    [name]="input.name"
+                    [showLabel]="input.showLabel"
+                    [type]="input.type"
+                    [placeHolder]="input.placeHolder"
+                    [value]="input.value"
+                    ></app-input>
+                    <app-textarea *ngIf="validateTextAreaField(input.type)"
+                    [labelName]="input.labelName"
+                    (onInputValueEmit)="onInputValueEmit($event)"
+                    [name]="input.name"
+                    [showLabel]="input.showLabel"
+                    [type]="input.type"
+                    [placeHolder]="input.placeHolder"
+                    [value]="input.value"
+                    ></app-textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" [disabled]="!allRequiredFieldsFilled()"
+           (click)="saveRecord()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>

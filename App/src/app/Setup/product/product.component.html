@@ -1,0 +1,22 @@
+<app-modal #productModal [formDetail]="formDetail" (fieldDataEmit)="fieldDataEmit($event)" [formTitle]="modalFormTitle"></app-modal>
+
+<div class="container">
+    <!-- Button trigger modal -->
+  
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-between">
+      <input type="text" style="max-width: 250px;" class="form-control mx-2" id="name"  [(ngModel)]="searchValue"  placeholder="Search by Product Name" (input)="search()">
+      
+      <button type="button" class="btn btn-primary" (click)="AddProduct()">
+        <i class="fa-solid fa-plus"></i> Add Product
+      </button>
+      
+    </div>
+  </div>
+  <app-table [data]="products" [columns]="productColumns"
+  [hasPrevPage]="hasPrevPage" [hasNextPage]="hasNextPage" [totalCount]="totalCount"
+  (OnPageChangeEmit)="OnPageChangeEmit($event)"
+  (OnEditEmit)="OnEditEmit($event)"
+  (OnDeleteEmit)="OnDeleteEmit($event)"
+  ></app-table>
+</div>

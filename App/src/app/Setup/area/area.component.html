@@ -1,0 +1,72 @@
+<div class="container">
+  <!-- Button trigger modal -->
+
+<div class="row my-3">
+  <div class="col-12 d-flex justify-content-between">
+    <input type="text" style="max-width: 250px;" class="form-control mx-2" id="name" [(ngModel)]="searchValue"  placeholder="Search by Area Name" (input)="search()">
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fa-solid fa-plus"></i> Add Area
+    </button>
+    
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #modalElement id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newArea.name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description:</label>
+          <textarea class="form-control" id="description" [(ngModel)]="newArea.description" name="description"></textarea>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="isActive" [(ngModel)]="newArea.isActive" name="isActive">
+          <label class="form-check-label" for="isActive">Is Active</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button *ngIf="newArea.id == ''" type="button" class="btn btn-primary" (click)="addArea()">Save changes</button>
+        <button *ngIf="newArea.id != ''" type="button" class="btn btn-primary" (click)="editArea()">Update changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">IsActive</th>
+            <th style="text-align: end;" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let area of areas;let i = index">
+            <th style="width: 5%;" scope="row">{{i + 1}}</th>
+            <td style="width: 25%;">{{area.name}}</td>
+            <td style="width: 40%;">{{area.description}}</td>
+            <td style="width: 15%;">{{area.isActive}}</td>
+            <td style="text-align: end;"><div>
+                <button type="button" class="btn btn-sm btn-secondary me-2" (click)="getArea(area.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button type="button" class="btn btn-sm  btn-danger" (click)="deleteArea(area.id)"><i class="fa-solid fa-trash-can"></i></button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <app-pagination [hasPrevPage]="hasPrevPage" [hasNextPage]="hasNextPage" [totalItems]="totalCount" (pageChanged)="onPageChange($event)"></app-pagination>
+
+</div>

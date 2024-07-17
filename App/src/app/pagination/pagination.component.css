@@ -1,0 +1,11 @@
+.input_class{
+    border-width: 1px 0 1px 0;
+     max-width: 50px;
+      height: 38px;
+      border-color: #e3e7ea !important;
+      text-align: center;
+}
+
+.input_class:focus-visible{
+    outline: none !important;
+}

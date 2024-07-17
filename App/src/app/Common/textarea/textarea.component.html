@@ -1,0 +1,6 @@
+<div class="mb-3">
+    <label [htmlFor]="name" class="form-label">{{labelName}}:</label>
+    <textarea [name]="name" [placeholder]="placeHolder" 
+    (ngModelChange)="onInputChange(name,type, $event)"
+    [(ngModel)]="value" class="form-control" [id]="name" ></textarea>
+  </div>
