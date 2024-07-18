@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistance.Migrations
 {
-    public partial class QuotationForm : Migration
+    public partial class quotation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Quotation",
+                name: "Quotations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,9 +28,9 @@ namespace Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quotation", x => x.Id);
+                    table.PrimaryKey("PK_Quotations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quotation_Contacts_ContactId",
+                        name: "FK_Quotations_Contacts_ContactId",
                         column: x => x.ContactId,
                         principalTable: "Contacts",
                         principalColumn: "Id",
@@ -38,7 +38,7 @@ namespace Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuotationItem",
+                name: "QuotationItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -53,44 +53,44 @@ namespace Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuotationItem", x => x.Id);
+                    table.PrimaryKey("PK_QuotationItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuotationItem_Products_ProductId",
+                        name: "FK_QuotationItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuotationItem_Quotation_QuotationId",
+                        name: "FK_QuotationItems_Quotations_QuotationId",
                         column: x => x.QuotationId,
-                        principalTable: "Quotation",
+                        principalTable: "Quotations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quotation_ContactId",
-                table: "Quotation",
-                column: "ContactId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_QuotationItem_ProductId",
-                table: "QuotationItem",
+                name: "IX_QuotationItems_ProductId",
+                table: "QuotationItems",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuotationItem_QuotationId",
-                table: "QuotationItem",
+                name: "IX_QuotationItems_QuotationId",
+                table: "QuotationItems",
                 column: "QuotationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quotations_ContactId",
+                table: "Quotations",
+                column: "ContactId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "QuotationItem");
+                name: "QuotationItems");
 
             migrationBuilder.DropTable(
-                name: "Quotation");
+                name: "Quotations");
         }
     }
 }

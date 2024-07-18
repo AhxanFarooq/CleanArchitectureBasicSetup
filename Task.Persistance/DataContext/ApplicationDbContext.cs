@@ -20,5 +20,7 @@ namespace Persistance.DataContext
         public DbSet<ContactDetail> ContactDetails { get; set; }
         public DbSet<ContactCoversation> ContactCoversations { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Quotation> Quotations { get; set; }
+        public DbSet<QuotationItem> QuotationItems { get; set; }
     }
 }

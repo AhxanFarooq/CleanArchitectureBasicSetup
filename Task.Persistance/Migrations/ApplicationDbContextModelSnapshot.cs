@@ -266,7 +266,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("ContactId");
 
-                    b.ToTable("Quotation");
+                    b.ToTable("Quotations");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuotationItem", b =>
@@ -305,7 +305,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("QuotationId");
 
-                    b.ToTable("QuotationItem");
+                    b.ToTable("QuotationItems");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
