@@ -48,7 +48,9 @@ namespace Application.Services.QuotationServices.Command.UpdateQuotationCommand
                 quotation.NetAmount = request.NetAmount;
                 quotation.Discount = request.Discount;
                 quotation.SaleTax = request.SaleTax;
-
+                quotation.TaxSign = request.TaxSign;
+                quotation.OverallDiscSign = request.OverallDiscSign;
+                                                    
                 // Update existing quotation details
                 foreach (var updatedDetailCommand in request.QuotationItemModels)
                 {
@@ -61,6 +63,7 @@ namespace Application.Services.QuotationServices.Command.UpdateQuotationCommand
                         existingDetail.Quantity = updatedDetailCommand.Quantity;
                         existingDetail.Discount = updatedDetailCommand.Discount;
                         existingDetail.LineTotal = updatedDetailCommand.LineTotal;
+                        existingDetail.DiscountSign = updatedDetailCommand.DiscountSign;
                     }
                 }
 
@@ -74,8 +77,9 @@ namespace Application.Services.QuotationServices.Command.UpdateQuotationCommand
                         UnitPrice = updatedDetailCommand.UnitPrice,
                         Quantity = updatedDetailCommand.Quantity,
                         Discount = updatedDetailCommand.Discount,
-                        LineTotal = updatedDetailCommand.LineTotal
-                    });
+                        LineTotal = updatedDetailCommand.LineTotal,
+                        DiscountSign = updatedDetailCommand.DiscountSign
+                });
                 }
 
                 // Optionally, remove quotation details that are missing from the updated details

@@ -16,5 +16,6 @@ namespace Application.Services.QuotationServices.Command.AddQuotationCommand
         public decimal Quantity { get; set; }
         public decimal Discount { get; set; }
         public decimal LineTotal { get; set; }
+        public string DiscountSign { get; set; }
     }
 }

@@ -10,8 +10,12 @@ export class DropdownComponent {
   @Output() selectionChange = new EventEmitter<any>();
   @Input() label:string='';
   @Input() showLabel:boolean=true;
+ // @Input() selectedId:string='';
 
-  selectedValue: any;
+  @Input() selectedValue: string='';
+  ngOnInit(){
+    //this.selectedValue = this.selectedId
+  }
 
   onChange(event: Event) {
     const target = event.target as HTMLSelectElement;  // Type assertion

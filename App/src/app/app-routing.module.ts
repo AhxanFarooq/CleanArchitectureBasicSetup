@@ -32,10 +32,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'balance', component: BalanceComponent },
-  //{ path: 'main', component: MainComponent },
-  
-  //{ path: '', redirectTo: '/login', pathMatch: 'full' } // Default route
+  { path: 'balance', component: BalanceComponent }
 ];
 
 

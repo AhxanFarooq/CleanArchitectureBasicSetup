@@ -4,6 +4,7 @@ using Application.Services.AreaServices.Command.GetAllQuotationQuery;
 using Application.Services.AreaServices.Command.GetQuotationQuery;
 using Application.Services.AreaServices.Command.UpdateQuotationCommand;
 using Application.Services.Common;
+using Application.Services.QuotationServices.Queries.GetAutoCode;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -93,6 +94,18 @@ namespace NowApi.Controllers
         {
             await _mediator.Send(new DeleteQuotationRequest { Id = id }, cancellationToken);
             return NoContent();
+        }
+
+        [Route("GetAutoCode")]
+        [HttpGet]
+
+        public async Task<ActionResult<GetAutoCodeResponse>> GetAutoCode(
+           CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetAutoCodeRequest() , cancellationToken);
+            if (response is null)
+                return NotFound();
+            return response;
         }
     }
 }

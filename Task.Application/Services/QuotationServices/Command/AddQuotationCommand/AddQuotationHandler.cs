@@ -43,7 +43,8 @@ namespace Application.Services.AreaServices.Command.AddQuotationCommand
                     UnitPrice = d.UnitPrice,
                     Quantity = d.Quantity,
                     Discount = d.Discount,
-                    LineTotal = d.LineTotal
+                    LineTotal = d.LineTotal,
+                    DiscountSign = d.DiscountSign
                 }).ToList();
                
                 _quotationRepository.Create(quotation);

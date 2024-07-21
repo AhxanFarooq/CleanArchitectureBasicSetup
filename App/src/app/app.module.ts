@@ -25,6 +25,7 @@ import { TableComponent } from './Common/table/table.component';
 import { QuotationComponent } from './MainForm/quotation/quotation.component';
 import { AddQuotationComponent } from './MainForm/quotation/add-quotation/add-quotation.component';
 import { DropdownComponent } from './Common/dropdown/dropdown.component';
+import { TextselectDirective } from './textselect.directive';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { DropdownComponent } from './Common/dropdown/dropdown.component';
     TableComponent,
     QuotationComponent,
     AddQuotationComponent,
-    DropdownComponent
+    DropdownComponent,
+    TextselectDirective
   ],
   imports: [
     BrowserModule,

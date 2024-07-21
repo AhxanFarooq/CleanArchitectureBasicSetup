@@ -19,6 +19,8 @@ namespace Domain.Entities
         public decimal SaleTax { get; set; }
         public decimal NetAmount { get; set; }
         public string TermAndCondition { get; set; }
+        public string OverallDiscSign { get; set; }
+        public string TaxSign { get; set; }
         public virtual ICollection<QuotationItem> QuotationItems { get; set; }
     }
 }

@@ -53,9 +53,11 @@ namespace Application.Services.QuotationServices.Command.GetAllQuotationQuery
                     Discount = x.Discount,
                     SaleTax = x.SaleTax,
                     TermAndCondition = x.TermAndCondition,
-                    ContactName = x.Contact.CompanyTitle,
+                    ContactName = x.Contact?.CompanyTitle,
                     DueDateStr = x.DueDate?.ToString("d"),
-                    DateStr = x.Date?.ToString("d")
+                    DateStr = x.Date?.ToString("d"),
+                    OverallDiscSign = x.OverallDiscSign,
+                    TaxSign = x.TaxSign,
 
                 }).ToList();
                 return new PaginatedResponse<GetAllQuotationResponse>(response, request.PageIndex, request.TotalPages, totalRecord);

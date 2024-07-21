@@ -7,28 +7,30 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <app-dropdown [items]="items" [label]="labelContactDropdown" (selectionChange)="onDropdownChange($event)"></app-dropdown>
+                  <div class="mb-3">
+                    <label for="Code" class="form-label">Code:</label>
+                    <input type="text" name="Code" placeholder="Code" disabled
+                    [(ngModel)]="newQuotation.code" class="form-control" id="Code" >
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <app-dropdown [selectedValue]="newQuotation.contactId" [items]="items" [label]="labelContactDropdown" (selectionChange)="onDropdownChange($event)"></app-dropdown>
 
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <app-input
-                    [labelName]="'Date'"
-                    (onInputValueEmit)="onDateEmit($event)"
-                    [name]="'Date'"
-                    [showLabel]="true"
-                    [type]="'Date'"
-                    [placeHolder]="'Date'"
-                    ></app-input>
+                  <div class="mb-3">
+                    <label for="Date" class="form-label">Date:</label>
+                    <input type="Date" name="Date" placeholder="Date" 
+                    [(ngModel)]="newQuotation.date" class="form-control" id="Date" >
+                  </div>
+                    
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <app-input
-                    [labelName]="'Due Date'"
-                    (onInputValueEmit)="onDueDateEmit($event)"
-                    [name]="'DueDate'"
-                    [showLabel]="true"
-                    [type]="'Date'"
-                    [placeHolder]="'Due Date'"
-                    ></app-input>
+                  <div class="mb-3">
+                    <label for="DueDate" class="form-label">Due Date:</label>
+                    <input type="Date" name="DueDate" placeholder="Due Date" 
+                    [(ngModel)]="newQuotation.dueDate" class="form-control" id="DueDate" >
+                  </div>
                 </div>
             </div>
             <div class="row" style="margin: auto;">
@@ -45,51 +47,50 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row" style="width: 5%;">1</th>
+                      <tr *ngFor="let quotationItem of newQuotation.quotationItemModels; let i = index">
+                        <th scope="row" style="width: 2%;">{{i+1}}</th>
                         <td style="width: 30%;">
-                            <app-dropdown [items]="productItems" [showLabel]="false" [label]="labelProductDropdown" (selectionChange)="onProductDropdownChange($event)"></app-dropdown>
+                            <app-dropdown [selectedValue]="quotationItem.productId" [items]="productItems" [showLabel]="false" [label]="labelProductDropdown" (selectionChange)="onProductDropdownChange(i,$event)"></app-dropdown>
                         </td>
                         <td style="width: 15%;">
-                            <app-input
-                                [labelName]="'Unit Price'"
-                                (onInputValueEmit)="onDueDateEmit($event)"
-                                [name]="'unitPrice'"
-                                [showLabel]="false"
-                                [type]="'string'"
-                                [placeHolder]="'Unit Price'"></app-input>
+                          <div class="mb-3">
+                            <input type="text" name="unitPrice" style="box-shadow: none;" (ngModelChange)="calculateLineTotal(i,'unitPrice', $event)" placeholder="Unit Price" 
+                            [(ngModel)]="quotationItem.unitPrice" appTextselect class="form-control" id="unitPrice" >
+                          </div>
                         </td>
                         <td style="width: 15%;">
-                            <app-input
-                                [labelName]="'Quantity'"
-                                (onInputValueEmit)="onDueDateEmit($event)"
-                                [name]="'quantity'"
-                                [showLabel]="false"
-                                [type]="'string'"
-                                [placeHolder]="'Quantity'"></app-input>
+                          <div class="mb-3">
+                            <input type="text" name="quantity" style="box-shadow: none;" placeholder="Quantity" appTextselect (ngModelChange)="calculateLineTotal(i,'quantity', $event)"
+                            [(ngModel)]="quotationItem.quantity" class="form-control" id="quantity" >
+                          </div>
+                            
                         </td>
                         <td style="width: 15%;">
-                            <app-input
-                                [labelName]="'Discount'"
-                                (onInputValueEmit)="onDueDateEmit($event)"
-                                [name]="'discount'"
-                                [showLabel]="false"
-                                [type]="'string'"
-                                [placeHolder]="'Discount'"></app-input>
+                          <div class="mb-3">
+                            <div class="input-group">
+                              <input type="text" name="discount" style="box-shadow: none;" placeholder="Discount" appTextselect (ngModelChange)="calculateLineTotal(i,'discount', $event)"
+                            [(ngModel)]="quotationItem.discount" class="form-control" id="discount" >
+                              <button (click)="onDiscountSignChange(i)"  class="btn btn-primary" type="button" id="button-addon2">{{quotationItem.discountSign}}</button>
+                          </div>
+                          </div>
+                            
                         </td>
                         <td style="width: 15%;">
-                            <app-input
-                                [labelName]="'Total'"
-                                (onInputValueEmit)="onDueDateEmit($event)"
-                                [name]="'total'"
-                                [showLabel]="false"
-                                [type]="'string'"
-                                [placeHolder]="'Total'"></app-input>
+                          <div class="mb-3">
+                            <input type="text" name="total" style="box-shadow: none;" placeholder="Total" disabled appTextselect
+                            [(ngModel)]="quotationItem.lineTotal" class="form-control" id="total" >
+                          </div>
+                           
                         </td>
                         <td style="width: 5%;">
-                            <button  type="button" class="btn btn-sm  btn-danger" style="margin-top: 2px;" title="Delete">
+                            <div style="display: flex; justify-content: center;">
+                              <button  type="button" (click)="addQuotationItemField()" class="btn btn-sm  btn-primary" style="margin-top: 2px;margin-right: 2px;" title="Delete">
+                                <i class="fa-solid fa-plus"></i>
+                              </button>
+                            <button  type="button" class="btn btn-sm  btn-danger" (click)="removeQuotationItemField(i)" style="margin-top: 2px;" title="Delete">
                                 <i class="fa-solid fa-trash-can"></i>
                               </button>
+                            </div>
                         </td>
                       </tr>
                     </tbody>
@@ -97,14 +98,12 @@
             </div>
             <div class="row " >
                 <div class="col-sm-12 col-md-12 col-lg-6 text_area" >
-                    <app-textarea 
-                    [labelName]="'Terms And Conditions'"
-                    (onInputValueEmit)="onDueDateEmit($event)"
-                    [name]="'termAndCondition'"
-                    [showLabel]="true"
-                    [placeHolder]="'Term And Condition'"
-                    [value]="''"
-                    ></app-textarea>
+                  <div class="mb-3">
+                    <label for="termAndCondition" class="form-label">Terms And Conditions:</label>
+                    <textarea name="termAndCondition" placeholder="Terms And Conditions" 
+                    [(ngModel)]="newQuotation.termAndCondition" class="form-control" id="termAndCondition" ></textarea>
+                  </div>
+                
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6" >
                     <table class="table table-striped" style="border: 1px solid #e9ecef; border-radius: 4px;">
@@ -113,25 +112,39 @@
                           <tr >
                             <th scope="row" style="width: 50%; border: 1px solid #e9ecef; ">Total</th>
                             <td style="width: 50%; ">
-                               500000
+                               <input type="number" name="totalamount" placeholder="Total Amount" style="box-shadow: none;
+                                border: none;background-color: transparent;" disabled
+                              [(ngModel)]="newQuotation.totalAmount" class="form-control" id="totalamount" >
                             </td>
                           </tr>
                           <tr >
                             <th scope="row" style="width: 50%; border: 1px solid #e9ecef; ">Discount</th>
                             <td style="width: 50%;  ">
-                               5000
+                              
+                              <div class="input-group">
+                                <input type="number" name="oveallDiscount" placeholder="Discount" style="box-shadow: none;" appTextselect 
+                                [(ngModel)]="newQuotation.discount" class="form-control" id="oveallDiscount" (ngModelChange)="onOverAllChanging()">
+                                <button (click)="onOverallDiscChangeSign()"  class="btn btn-primary" type="button" id="button-addon2">{{newQuotation.overallDiscSign}}</button>
+                            </div>
                             </td>
                           </tr>
                           <tr >
-                            <th scope="row" style="width: 50%; border: 1px solid #e9ecef; ">Sale Tax</th>
+                            <th scope="row" style="width: 50%; border: 1px solid #e9ecef; ">VAT/Tax</th>
                             <td style="width: 50% ;">
-                               500000
+                              <div class="input-group">
+                                <input type="number" name="vat" placeholder="VAT/Tax" style="box-shadow: none;
+                                border: none;"   appTextselect 
+                              [(ngModel)]="newQuotation.saleTax" class="form-control" id="vat"  (ngModelChange)="onOverAllChanging()">
+                                <button (click)="onChangeSign()"  class="btn btn-primary" type="button" id="button-addon2">{{newQuotation.taxSign}}</button>
+                            </div>
                             </td>
                           </tr>
                           <tr >
                             <th scope="row" style="width: 50%; border: 1px solid #e9ecef; ">Grand Total</th>
                             <td style="width: 50%;">
-                               500000
+                              <input type="number" name="netAmount" placeholder="Net Amount" style="box-shadow: none;
+                              border: none;background-color: transparent;" disabled
+                            [(ngModel)]="newQuotation.netAmount" class="form-control" id="netAmount" >
                             </td>
                           </tr>
                         </tbody>
@@ -140,10 +153,13 @@
             </div>
             <div class="row justify-content-end" >
                 <div class="col-auto">
-                    <button type="button"  class="btn btn-primary" >
+                    <button *ngIf="isEdit" type="button"  class="btn btn-primary" (click)="UpdateChanges()">
+                        Update
+                    </button>
+                    <button *ngIf="!isEdit" type="button"  class="btn btn-primary" (click)="SaveChanges()">
                         Save
                     </button>
-                    <button type="button" class="btn btn-danger" style="margin-left: 5px;">
+                    <button type="button" class="btn btn-danger" (click)="NavigateToList()" style="margin-left: 5px;">
                         Cancel
                     </button>
                 </div>
