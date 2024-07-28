@@ -45,7 +45,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-builder.Services.CorsPolicyConfiguration(MyAllowSpecificOrigins);
+builder.Services.CorsPolicyConfiguration(builder.Configuration,MyAllowSpecificOrigins);
 builder.Services.BehaviorExtensionService();
 builder.Services.ApplicationExtensionService();
 builder.Services.JwtAuthenticationConfigure();

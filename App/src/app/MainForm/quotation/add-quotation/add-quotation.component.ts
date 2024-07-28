@@ -6,6 +6,9 @@ import { SetupService } from 'src/app/services/setup.service';
 import { QuotationService } from 'src/app/services/quotation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import moment from 'moment';
+import { PrintDownloadService } from 'src/app/services/print-download.service';
+import { Validators, Editor, Toolbar } from 'ngx-editor';
+
 
 @Component({
   selector: 'app-add-quotation',
@@ -14,7 +17,7 @@ import moment from 'moment';
 })
 export class AddQuotationComponent {
 
-  constructor(private companyService:CompanyService, private setupService:SetupService,
+  constructor(private companyService:CompanyService, private setupService:SetupService,private printDownloadService: PrintDownloadService,
      private router: Router, private quotationService: QuotationService, private route: ActivatedRoute
   ){
 
@@ -286,6 +289,14 @@ export class AddQuotationComponent {
       }
       
       this.newQuotation.netAmount = total;
+  }
+  
+  print(): void {
+    this.printDownloadService.printReport('reportContent');
+  }
+
+  download(): void {
+    this.printDownloadService.downloadPDF('reportContent');
   }
 }
 enum FieldName{

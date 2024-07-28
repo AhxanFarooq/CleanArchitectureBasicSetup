@@ -2,7 +2,7 @@
 {
     public static class CorsPolicyExtensions
     {
-        public static void CorsPolicyConfiguration(this IServiceCollection services, string config)
+        public static void CorsPolicyConfiguration(this IServiceCollection services, IConfiguration configuration, string config)
         {
             services.AddCors(options =>
             {
@@ -12,8 +12,8 @@
 
                         //builder.WithOrigins(Configuration.GetSection("frontend:IpAndServerAddress").Value, "app://.").AllowAnyMethod()
                         //.AllowAnyHeader();
-
-                        builder1.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                        
+                        builder1.WithOrigins(configuration.GetSection("frontend:IpAndServerAddress").Value).AllowAnyHeader().AllowAnyMethod();
                     });
             });
         }
