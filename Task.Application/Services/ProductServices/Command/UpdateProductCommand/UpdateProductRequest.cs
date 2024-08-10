@@ -15,6 +15,7 @@ namespace Application.ProductServices.ProductServices.UpdateProductCommand
         public decimal SalePrice { get; set; }
         public decimal RetailPrice { get; set; }
         public string? Description { get; set; }
+        public string? ImagePath { get; set; }
         public bool IsActive { get; set;}
     }
 }

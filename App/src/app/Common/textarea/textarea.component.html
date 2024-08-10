@@ -1,6 +1,11 @@
-<div class="mb-3">
+<div class="mb-3" *ngIf="!isRichTextArea">
     <label [htmlFor]="name" class="form-label">{{labelName}}:</label>
     <textarea [name]="name" [placeholder]="placeHolder" 
     (ngModelChange)="onInputChange(name,type, $event)"
     [(ngModel)]="value" class="form-control" [id]="name" ></textarea>
+  </div>
+<div class="mb-3" *ngIf="isRichTextArea">
+    <label [htmlFor]="name" class="form-label">{{labelName}}:</label>
+    <angular-editor    (ngModelChange)="onInputChange(name,type, $event)"
+    [(ngModel)]="value" [config]="editorConfig"></angular-editor>
   </div>

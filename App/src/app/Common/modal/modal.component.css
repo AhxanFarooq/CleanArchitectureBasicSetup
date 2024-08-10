@@ -1,0 +1,7 @@
+.crm_modal_dialog_large{
+    max-width: 80%;
+}
+
+::ng-deep .modal-body .image-uploader{
+    margin-top: 32px;
+}

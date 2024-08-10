@@ -13,6 +13,7 @@ namespace Domain.Entities
         public decimal SalePrice { get; set; }
         public decimal RetailPrice { get; set; }
         public string? Description { get; set; }
+        public string? ImagePath { get; set; }
         public bool IsActive { get; set; }
         public virtual ICollection<QuotationItem> QuotationItems { get; set; }
     }

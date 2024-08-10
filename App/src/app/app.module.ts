@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import '@angular/localize/init';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +27,8 @@ import { AddQuotationComponent } from './MainForm/quotation/add-quotation/add-qu
 import { DropdownComponent } from './Common/dropdown/dropdown.component';
 import { TextselectDirective } from './textselect.directive';
 import { ReportComponent } from './report/report.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ImageuploaderComponent } from './Common/imageuploader/imageuploader.component';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { ReportComponent } from './report/report.component';
     AddQuotationComponent,
     DropdownComponent,
     TextselectDirective,
-    ReportComponent
+    ReportComponent,
+    ImageuploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +63,11 @@ import { ReportComponent } from './report/report.component';
     FormsModule ,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    AngularEditorModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

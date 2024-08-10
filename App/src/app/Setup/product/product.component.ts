@@ -55,6 +55,7 @@ export class ProductComponent {
           salePrice: prod.salePrice,
           retailPrice: prod.retailPrice,
           description: prod.description,
+          imagePath: prod.imagePath,
           isActive: prod.isActive
         }))
         // Handle response, store token, navigate or display a message
@@ -75,10 +76,11 @@ export class ProductComponent {
 
   GenerateFormDetail(){
     this.formDetail = [
-      new FormDetail('Name','name','string','','Name',true,'col-12',true),
-      new FormDetail('Retail Price','retailPrice','number','','Retail Price',true,'col-6',true),
-      new FormDetail('Sale Price','salePrice','number','','Sale Price',true,'col-6',true),
-      new FormDetail('Description','description','textarea','','Description',true,'col-12'),
+      new FormDetail('Name','name','string','','Name',true,'col-6',true),
+      new FormDetail('Retail Price','retailPrice','number','','Retail Price',true,'col-3',true),
+      new FormDetail('Sale Price','salePrice','number','','Sale Price',true,'col-3',true),
+      new FormDetail('Description','description','textarea','','Description',true,'col-8',false,true),
+      new FormDetail('Image','imagePath','image','','image',true,'col-4',false,false),
     ]
   }
   fieldDataEmit(data:Map<string,any>){
@@ -108,6 +110,7 @@ export class ProductComponent {
           salePrice: prod.salePrice,
           retailPrice: prod.retailPrice,
           description: prod.description,
+          imagePath: prod.imagePath,
           isActive: prod.isActive
         }))
         // Handle response, store token, navigate or display a message
@@ -123,6 +126,7 @@ export class ProductComponent {
     });
   }
   AddProduct(){
+    this.GenerateFormDetail()
     this.productModal.show()
   }
   closeModelEvent(isClose:boolean){
@@ -137,7 +141,7 @@ export class ProductComponent {
     this.isUpdate=true;
     this.updateId = item.id;
     for(var data of this.formDetail){
-      data.value = item[data.name].toString();
+      data.value = item[data.name]?.toString();
     }
     this.productModal.show()
   }

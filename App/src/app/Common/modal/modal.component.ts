@@ -15,6 +15,8 @@ export class ModalComponent {
   @Input()
   formTitle : string="Modal Tite" ;
 
+  @Input() modalLg:boolean=false;
+
   @Output()
   fieldDataEmit = new EventEmitter<Map<string, any>>();
 
@@ -53,7 +55,11 @@ export class ModalComponent {
     return type.toLowerCase() === 'textarea'
   }
   saveRecord(){
+    console.log(this.fieldData)
     this.fieldDataEmit.emit(this.fieldData);
+  }
+  validateImageField(type:string){
+    return type.toLowerCase() === 'image'
   }
   onInputValueEmit(eventData: { name: string,type:string, value: any }){
     if(eventData.type === 'number')
@@ -69,7 +75,7 @@ export class ModalComponent {
 }
 
 export class FormDetail {
-  constructor(placeHolder: string,name: string,type: string,value: any,labelName: string,showLabel: boolean=true, classcol:string='col-12',isRequired:boolean=false ){
+  constructor(placeHolder: string,name: string,type: string,value: any,labelName: string,showLabel: boolean=true, classcol:string='col-12',isRequired:boolean=false,isRichTextArea:boolean=false ){
     this.name = name;
     this.placeHolder = placeHolder;
     this.labelName = labelName;
@@ -78,6 +84,7 @@ export class FormDetail {
     this.showLabel = showLabel;
     this.classcol = classcol;
     this.isRequired = isRequired;
+    this.isRichTextArea = isRichTextArea;
   }
   placeHolder: string = '';
   name: string = '';
@@ -85,6 +92,7 @@ export class FormDetail {
   value: any;
   showLabel: boolean = true;
   isRequired: boolean = false;
+  isRichTextArea: boolean = false;
   labelName: string = ''
   classcol: string = ''
 }

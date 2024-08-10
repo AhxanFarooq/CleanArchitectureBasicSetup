@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Application.Services.ProductServices.Command.AddProductCommand
 {
-    public record AddProductRequest(string Name,int SalePrice,int RetailPrice, string Description = "", bool IsActive = false):IRequest<AddProductResponse>;
+    public record AddProductRequest(string Name,int SalePrice,int RetailPrice, string Description = "", string ImagePath = "" , bool IsActive = false):IRequest<AddProductResponse>;
 }

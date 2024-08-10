@@ -7,7 +7,7 @@ import { QuotationService } from 'src/app/services/quotation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import moment from 'moment';
 import { PrintDownloadService } from 'src/app/services/print-download.service';
-import { Validators, Editor, Toolbar } from 'ngx-editor';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 
 @Component({
@@ -54,6 +54,32 @@ export class AddQuotationComponent {
   labelProductDropdown:string='Product';
   items:Array<{name: string, id: string}> = [];
   productItems:Array<{name: string, id: string}> = [];
+
+  htmlContent = '';
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: 'Terms And Conditions...',
+    translate: 'no',
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  }
 
   fetchContacts() {
     this.companyService.GetAll(this.pageIndex, this.totalPages).subscribe({
@@ -320,6 +346,8 @@ export class Quotation{
     quotationItemModels: QuotationItems[] = [];
     taxSign:string='F';
     overallDiscSign:string='F';
+    addressing:string='Dear Sir';
+    subject:string='';
 }
 
 export class QuotationItems{

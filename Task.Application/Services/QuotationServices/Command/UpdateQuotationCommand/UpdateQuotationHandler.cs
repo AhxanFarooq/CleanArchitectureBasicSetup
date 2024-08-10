@@ -50,6 +50,9 @@ namespace Application.Services.QuotationServices.Command.UpdateQuotationCommand
                 quotation.SaleTax = request.SaleTax;
                 quotation.TaxSign = request.TaxSign;
                 quotation.OverallDiscSign = request.OverallDiscSign;
+                quotation.TermAndCondition = request.TermAndCondition;
+                quotation.Addressing = request.Addressing;
+                quotation.Subject = request.Subject;
                                                     
                 // Update existing quotation details
                 foreach (var updatedDetailCommand in request.QuotationItemModels)

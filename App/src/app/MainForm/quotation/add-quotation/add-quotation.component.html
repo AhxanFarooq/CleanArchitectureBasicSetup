@@ -2,7 +2,14 @@
 <div class="container" style="margin-top: 20px;">
     <div class="card ">
         <div class="card-header">
-          <h2>Quotation</h2>
+          <div class="row m-0 p-0">
+            <div class="col-6 m-0 p-0">
+              <h2>Quotation</h2>
+            </div>
+            <div class="col-6 m-0 p-0" style="text-align: end;">
+              <h6>{{newQuotation.date}}</h6>
+            </div>
+          </div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -19,17 +26,17 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                   <div class="mb-3">
-                    <label for="Date" class="form-label">Date:</label>
-                    <input type="Date" name="Date" placeholder="Date" 
-                    [(ngModel)]="newQuotation.date" class="form-control" id="Date" >
+                    <label for="addressing" class="form-label">Addressing:</label>
+                    <input type="text" name="addressing" placeholder="Addressing" 
+                    [(ngModel)]="newQuotation.addressing" class="form-control" id="addressing" >
                   </div>
                     
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="col-sm-12 col-md-12 col-lg-6">
                   <div class="mb-3">
-                    <label for="DueDate" class="form-label">Due Date:</label>
-                    <input type="Date" name="DueDate" placeholder="Due Date" 
-                    [(ngModel)]="newQuotation.dueDate" class="form-control" id="DueDate" >
+                    <label for="DueDate" class="form-label">Subject:</label>
+                    <textarea name="subject" placeholder="Subject" 
+                    [(ngModel)]="newQuotation.subject" class="form-control" id="subject" ></textarea>
                   </div>
                 </div>
             </div>
@@ -99,9 +106,10 @@
             <div class="row " >
                 <div class="col-sm-12 col-md-12 col-lg-6 text_area" >
                   <div class="mb-3">
-                    <label for="termAndCondition" class="form-label">Terms And Conditions:</label>
-                    <textarea name="termAndCondition" placeholder="Terms And Conditions" 
-                    [(ngModel)]="newQuotation.termAndCondition" class="form-control" id="termAndCondition" ></textarea>
+                    <!-- <label for="termAndCondition" class="form-label">Terms And Conditions:</label> -->
+                    <!-- <textarea name="termAndCondition" placeholder="Terms And Conditions" 
+                    [(ngModel)]="newQuotation.termAndCondition" class="form-control" id="termAndCondition" ></textarea> -->
+                    <angular-editor [(ngModel)]="newQuotation.termAndCondition" [config]="editorConfig"></angular-editor>
                   </div>
                 
                 </div>

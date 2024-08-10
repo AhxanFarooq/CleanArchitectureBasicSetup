@@ -17,8 +17,8 @@ using Application.Services.ProductServices.Command.GetProductQuery;
 using Application.Services.ProductServices.Command.UpdateProductCommand;
 using Application.Services.UserServices.Queries.GetUserBalance;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NowApi.Controllers
 {
@@ -28,9 +28,11 @@ namespace NowApi.Controllers
     {
         private readonly IMediator _mediator;
 
-        public SetupController(IMediator mediator)
+        private readonly  IWebHostEnvironment _hostingEnvironment;
+        public SetupController(IMediator mediator, IWebHostEnvironment hostingEnvironment)
         {
             _mediator = mediator;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         #region Area
@@ -271,6 +273,65 @@ namespace NowApi.Controllers
             if (response is null)
                 return NotFound();
             return response;
+        }
+        #endregion
+
+        #region
+        [Route("ImageUploader/UploadFilesAsync")]
+        [HttpPost]
+        public IActionResult UploadFilesAsync(List<IFormFile> files)
+        {
+
+
+            string dbFilePath;
+            string filePath;
+            var dbPath = string.Empty;
+            if (files != null && files.Any())
+            {
+                //check if Attachment folder is not created
+                var pathWithFolderName = Path.Combine(_hostingEnvironment.ContentRootPath, "Attachment");
+                if (!Directory.Exists(pathWithFolderName))
+                {
+                    var di = Directory.CreateDirectory(pathWithFolderName);
+                }
+
+                {
+                    foreach (var file in files)
+                    {
+                        //save file in attachment folder
+                        if (file.Length > 0)
+                        {
+                            var extenstion = Path.GetExtension(file.FileName);
+                            var myUniqueFileName = Guid.NewGuid().ToString();
+                            dbFilePath = myUniqueFileName + extenstion;
+                            dbPath = "/Attachment/" + dbFilePath;
+                            filePath = Path.Combine(pathWithFolderName, dbFilePath);
+                            var fileStream = new FileStream(filePath, FileMode.Create);
+                            file.CopyTo(fileStream);
+                            fileStream.Close();
+                        }
+                    }
+                }
+
+
+
+            }
+            return Ok(new {message= dbPath });
+        }
+        [Route("ImageUploader/GetBase64ImagePath")]
+        [HttpGet]
+        public IActionResult GetBase64ImagePath(string path)
+        {
+
+
+            var logoBase64 = "";
+            var imagePath = Path.Combine(_hostingEnvironment.ContentRootPath, path.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            if (System.IO.File.Exists(imagePath))
+            {
+                var bytes = System.IO.File.ReadAllBytesAsync(imagePath);
+                logoBase64 = Convert.ToBase64String(bytes.Result);
+            }
+            return Ok(new { message = logoBase64 });
         }
         #endregion
     }

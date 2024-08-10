@@ -1,5 +1,5 @@
 <div class="modal fade" #modalElement id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" [ngClass]="{crm_modal_dialog_large:modalLg}">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">{{formTitle}}</h1>
@@ -21,11 +21,17 @@
                     [labelName]="input.labelName"
                     (onInputValueEmit)="onInputValueEmit($event)"
                     [name]="input.name"
+                    [isRichTextArea]="input.isRichTextArea"
                     [showLabel]="input.showLabel"
                     [type]="input.type"
                     [placeHolder]="input.placeHolder"
                     [value]="input.value"
                     ></app-textarea>
+                    <app-imageuploader *ngIf="validateImageField(input.type)"
+                     [filePath]="input.value"
+                     [type]="input.type"
+                     [name]="input.name"
+                       (onImageUploadEvent)="onInputValueEmit($event)"></app-imageuploader>
                 </div>
             </div>
         </div>

@@ -43,6 +43,7 @@ namespace Application.Services.ProductServices.Command.UpdateProductCommand
                 product.SalePrice = request.SalePrice;
                 product.RetailPrice = request.RetailPrice;
                 product.Description = request.Description;
+                product.ImagePath = request.ImagePath;
                 product.IsActive =   request.IsActive;
 
                 _productRepository.Update(product);

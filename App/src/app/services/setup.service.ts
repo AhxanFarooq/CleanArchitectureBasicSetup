@@ -34,5 +34,11 @@ export class SetupService {
   public Search(formName:string, search:string, pageIndex:number, totalPages:number):Observable<any>{
     return this.http.get(`${this.apiUrl}/${formName}/Search?search=${search}&pageIndex=${pageIndex}&totalPages=${totalPages}`);
   }
+  public ImageUploader(formName:string, imageData:FormData):Observable<any>{
+    return this.http.post(`${this.apiUrl}/${formName}/UploadFilesAsync`, imageData);
+  }
+  public GetBase64Image(formName:string, path:string):Observable<any>{
+    return this.http.get(`${this.apiUrl}/${formName}/GetBase64ImagePath?path=${path}`);
+  }
 
 }
