@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { QuotationReport } from 'src/app/report/report.component';
+import { PrintDownloadService } from 'src/app/services/print-download.service';
 import { QuotationService } from 'src/app/services/quotation.service';
 import Swal from 'sweetalert2';
 
@@ -18,6 +20,7 @@ export class QuotationComponent {
   totalPages:number = 10;
   pageIndex:number = 1;
   searchValue:string = '';
+  quotationReportData:QuotationReport = new QuotationReport();
   quotationColumns: TableColumn[] = [
     {
       key: 'code', title: 'Code', width: '10%',
@@ -56,7 +59,7 @@ export class QuotationComponent {
   quotations = [
     
   ];
-  constructor(private quotationService: QuotationService,private router: Router){
+  constructor(private quotationService: QuotationService,private router: Router,private printDownloadService: PrintDownloadService){
 
   }
 
@@ -188,5 +191,12 @@ export class QuotationComponent {
         // Handle error
       }
     });
+  }
+  print(): void {
+    this.printDownloadService.printReport('reportContent');
+  }
+
+  download(): void {
+    this.printDownloadService.downloadPDF('reportContent');
   }
 }

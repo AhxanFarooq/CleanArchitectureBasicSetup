@@ -17,7 +17,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class AddQuotationComponent {
 
-  constructor(private companyService:CompanyService, private setupService:SetupService,private printDownloadService: PrintDownloadService,
+  constructor(private companyService:CompanyService, private setupService:SetupService,
      private router: Router, private quotationService: QuotationService, private route: ActivatedRoute
   ){
 
@@ -315,14 +315,6 @@ export class AddQuotationComponent {
       }
       
       this.newQuotation.netAmount = total;
-  }
-  
-  print(): void {
-    this.printDownloadService.printReport('reportContent');
-  }
-
-  download(): void {
-    this.printDownloadService.downloadPDF('reportContent');
   }
 }
 enum FieldName{

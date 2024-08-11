@@ -1,50 +1,140 @@
-<div class="quotation-container" id="reportContent">
-  
-  
+<div class="quotation-container" id="reportContent" >
+
+
+
   <section class="content">
-    <h2>{{companyTitle}}</h2>
-    <p>{{address}}<br />{{city}}</p>
+    <table style="width: 100%;">
+      <tbody>
+        <tr >
+          <td colspan="2" style="text-align:right !important;padding-top: 8px;">{{quotationReport.TodayDate}}</td>
+        </tr>
+        <tr >
+          <td colspan="2">
+            <span
+              style="font-size: 22px; font-weight: bold; font-family: 'Times New Roman', Times, serif; line-height: normal;">
+              {{quotationReport.CompanyTitle}}
+            </span>
+            <br />
+            <span style="font-family: 'Times New Roman', Times, serif;line-height: normal;">{{quotationReport.Address}}</span>
+            <br />
+            <span style="font-family: 'Times New Roman', Times, serif;line-height: normal;">{{quotationReport.City}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: bold; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; padding-top: 8px;">
+              Attention:&nbsp;&nbsp;&nbsp;&nbsp;{{quotationReport.Attention}}
+            </p>
+          </td>
+         
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: bold; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; padding-top: 8px;">
+              Subject:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quotationReport.Subject}}
+            </p>
+          </td>
+          
+        </tr>
+        <tr >
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: bold; margin-bottom: 0px; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; padding-top: 8px;">
+              {{quotationReport.Greeting}}
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: normal;  margin-bottom: 0px; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; padding-top: 8px;">
+              {{quotationReport.Addressing}}
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: bold; margin-bottom: 0px; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; padding-top: 16px;">
+              {{quotationReport.ProductName}}
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td width="50%">
+            <p style="font-size: 16px; font-weight: normal; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; " [innerHTML]="quotationReport.ProductDescription">
+             
+            </p>
 
-    <div class="attention">
-      <p><strong>Attention:</strong> {{attention}}</p>
-      <p><strong>Subject:</strong>{{subject}}</p>
-    </div>
+          </td>
+          <td width="50%" *ngIf="quotationReport.productImage">
+            <img [src]=" 'data:image/png;base64,' + quotationReport.productImage" style="height: 150px; width: 300px; float: right;" alt="Logo">
+          </td>
+          <td width="50%" *ngIf=" !quotationReport.productImage">
+            
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 18px; font-weight: bold; 
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; color: green;" >
+             Price:  {{quotationReport.Price}}
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 22px; font-weight: bold; padding-top: 32px;
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; text-decoration: underline;" >
+             Terms & Conditions:
+            </p>
+          </td>
+          
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: normal;
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; " [innerHTML]="quotationReport.TermAndCondition">
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: normal;
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; ">
+             Thanking and assuring you of complete support!
+            </p>
+          </td>
+        </tr>
+        <tr style="width: 100%;">
+          <td colspan="2">
+            <p style="font-size: 16px; font-weight: normal; padding-top: 16px;
+            font-family: 'Times New Roman', Times, serif;
+             line-height: normal; ">
+             <strong>{{quotationReport.User}}</strong><br />{{quotationReport.UserDesignation}}
+            </p>
+          </td>
+        </tr>
 
-    <div class="salutation">
-      <p>{{greeting}}</p>
-    </div>
+      </tbody>
 
-    <div class="body">
-      <p>
-        {{addressing}}
-      </p>
+    </table>
 
-      <h3>Static Eliminator</h3>
-      <ul>
-        <li><strong>Model:</strong> CDI-106IB</li>
-        <li><strong>Input voltage:</strong> AC220V single phase 50/60Hz</li>
-        <li><strong>Output voltage:</strong> 7kW</li>
-        <li><strong>Working power:</strong> 50W</li>
-        <li><strong>Best working distance:</strong> 5-15CM</li>
-        <li><strong>One Eliminator with two bars</strong></li>
-        <li><strong>Eliminating bar:</strong> 106B-10</li>
-        <li><strong>Effective length:</strong> 200mm</li>
-        <li><strong>Total length:</strong> 300mm</li>
-      </ul>
-      <p class="price"><strong>Price:</strong> {{price}}</p>
-    </div>
 
-    <div class="terms">
-      <h3>Terms & Conditions:</h3>
-      <ul>
-        {{termAndCondition}}
-      </ul>
-    </div>
-
-    <div class="footer">
-      <p>Thanking and assuring you of complete support!</p>
-      <p><strong>M. Shahid Imran</strong><br />CEO</p>
-    </div>
+   
   </section>
 
 </div>
