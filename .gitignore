@@ -10,3 +10,6 @@
 /App/node_modules
 /App/.angular
 /App/dist
+/NowApi/Attachment
+/ScheduledTasks/bin/
+/ScheduledTasks/obj/
