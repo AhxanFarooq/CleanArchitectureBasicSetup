@@ -28,6 +28,10 @@ namespace Persistance.Repositories
         {
             return _context.Quotations.Include(x => x.QuotationItems).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
+        public Task<Quotation> GetQuotationByIdWithDetails(Guid id, CancellationToken cancellationToken)
+        {
+            return _context.Quotations.Include(x => x.QuotationItems).ThenInclude(x=>x.Product).Include(y=>y.Contact).ThenInclude(z=>z.ContactDetails).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
         public Task<List<Quotation>> GetAllQuotationWithItem(CancellationToken cancellationToken)
         {
             return _context.Quotations.Include(x => x.QuotationItems).Include(x=>x.Contact).OrderBy(x => x.Code).ToListAsync();

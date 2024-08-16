@@ -54,6 +54,7 @@ namespace Application.Services.QuotationServices.Command.GetAllQuotationQuery
                     SaleTax = x.SaleTax,
                     TermAndCondition = x.TermAndCondition,
                     Subject = x.Subject,
+                    Greeting = x.Greeting,
                     Addressing = x.Addressing,
                     ContactName = x.Contact?.CompanyTitle,
                     DueDateStr = x.DueDate?.ToString("d"),

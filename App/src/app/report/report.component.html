@@ -1,4 +1,4 @@
-<div class="quotation-container" id="reportContent" >
+<div class="quotation-container" id="reportContent" hidden>
 
 
 
@@ -76,10 +76,10 @@
             </p>
 
           </td>
-          <td width="50%" *ngIf="quotationReport.productImage">
-            <img [src]=" 'data:image/png;base64,' + quotationReport.productImage" style="height: 150px; width: 300px; float: right;" alt="Logo">
+          <td width="50%" *ngIf="quotationReport.ProductImage">
+            <img [src]=" 'data:image/png;base64,' + quotationReport.ProductImage" style="height: 150px; width: 300px; float: right;" alt="Logo">
           </td>
-          <td width="50%" *ngIf=" !quotationReport.productImage">
+          <td width="50%" *ngIf=" !quotationReport.ProductImage">
             
           </td>
         </tr>
@@ -124,7 +124,7 @@
             <p style="font-size: 16px; font-weight: normal; padding-top: 16px;
             font-family: 'Times New Roman', Times, serif;
              line-height: normal; ">
-             <strong>{{quotationReport.User}}</strong><br />{{quotationReport.UserDesignation}}
+             <strong>{{User}}</strong><br />{{UserDesignation}}
             </p>
           </td>
         </tr>

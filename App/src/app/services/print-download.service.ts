@@ -83,6 +83,12 @@ export class PrintDownloadService {
                 margin-bottom: 120px;
                 box-sizing: border-box;
             }
+                .crm_item_table {
+                  border: 1px solid #cdcdcd;
+                }
+                .crm_item_table td {
+                  border-top: 1px solid #cdcdcd;
+                }
             
         }
                 /* Hide the second page if content is small enough to fit on one page */

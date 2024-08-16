@@ -20,7 +20,7 @@ export class QuotationComponent {
   totalPages:number = 10;
   pageIndex:number = 1;
   searchValue:string = '';
-  quotationReportData:QuotationReport = new QuotationReport();
+  quotationReport:QuotationReport = new QuotationReport();
   quotationColumns: TableColumn[] = [
     {
       key: 'code', title: 'Code', width: '10%',
@@ -54,7 +54,7 @@ export class QuotationComponent {
       key: 'netAmount', title: 'Net Amount', width: '10%',
       buttons: []
     },
-    { key: 'actions', title: 'Actions',buttons:['edit','del'], isActionColumn: true,width:'15%' }
+    { key: 'actions', title: 'Actions',buttons:['edit','del','print'], isActionColumn: true,width:'15%' }
   ];
   quotations = [
     
@@ -108,6 +108,9 @@ export class QuotationComponent {
   }
   OnDeleteEmit(item:any){
     this.deleteQuotation(item.id);
+  }
+  OnPrintEmit(item:any){
+    this.print(item.id);
   }
   AddQuotation(){
     this.router.navigate(['/addQuotation']);
@@ -192,8 +195,47 @@ export class QuotationComponent {
       }
     });
   }
-  print(): void {
-    this.printDownloadService.printReport('reportContent');
+  print(id:string): void {
+    this.quotationService.GetReportDetail(id).subscribe({
+      next: (response) => {
+        //this.fetchQuotatios();
+        this.quotationReport.TodayDate = response.todayDate;
+        this.quotationReport.Address = response.address;
+        this.quotationReport.Addressing = response.addressing;
+        this.quotationReport.Attention = response.attention;
+        this.quotationReport.City = response.city;
+        this.quotationReport.CompanyTitle = response.companyTitle;
+        this.quotationReport.Greeting = response.greeting;
+        this.quotationReport.Price = response.price;
+        this.quotationReport.ProductDescription = response.productDescription;
+        this.quotationReport.ProductImage = response.productImage;
+        this.quotationReport.ProductName = response.productName;
+        this.quotationReport.Subject = response.subject;
+        this.quotationReport.TermAndCondition = response.termAndCondition;
+        this.quotationReport.quotationReportItemModels = response.quotationReportItemModels;
+        setTimeout(() => {
+          if(response.isMultipleItem){
+            this.printDownloadService.printReport('multipleItemReport');
+          }
+          else{
+            
+            this.printDownloadService.printReport('reportContent');
+          }
+          
+        }, 1500);
+        
+      },
+      error: (error) => {
+        Swal.fire({
+          title: 'Something went wrong?',
+          text: error,
+          icon: 'error'
+        })
+        // Handle error
+      }
+    });
+    
+    
   }
 
   download(): void {

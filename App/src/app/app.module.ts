@@ -29,6 +29,7 @@ import { TextselectDirective } from './textselect.directive';
 import { ReportComponent } from './report/report.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ImageuploaderComponent } from './Common/imageuploader/imageuploader.component';
+import { QuotationReportMultipleItemComponent } from './report/quotation-report-multiple-item/quotation-report-multiple-item.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ImageuploaderComponent } from './Common/imageuploader/imageuploader.com
     DropdownComponent,
     TextselectDirective,
     ReportComponent,
-    ImageuploaderComponent
+    ImageuploaderComponent,
+    QuotationReportMultipleItemComponent
   ],
   imports: [
     BrowserModule,

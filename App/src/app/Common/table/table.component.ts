@@ -18,6 +18,8 @@ export class TableComponent {
   OnEditEmit = new EventEmitter<any>();
   @Output()
   OnDeleteEmit = new EventEmitter<any>();
+  @Output()
+  OnPrintEmit = new EventEmitter<any>();
 
   constructor() {}
 
@@ -28,6 +30,9 @@ export class TableComponent {
   
   onDelete(item: any) {
     this.OnDeleteEmit.emit(item);
+  }
+  onPrint(item: any) {
+    this.OnPrintEmit.emit(item);
   }
   onPageChange(pageIndex: number): void {
     this.OnPageChangeEmit.emit(pageIndex);

@@ -1,0 +1,15 @@
+<div class="image-uploader" (click)="onImageClick()" >
+    <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+    <div *ngIf="imageSrc && base64Path == null" class="image-container">
+        <img [src]="imageSrc" alt="Uploaded Image" />
+        <button *ngIf="imageSrc !== 'assets\\images\\upload.png'" class="delete-icon" (click)="deleteImage($event)">
+            <i class="fa-solid fa-trash-can" ></i>
+        </button>
+    </div>
+    <div *ngIf="base64Path != null" class="image-container">
+        <img [src]="'data:image/png;base64,' + base64Path" alt="Uploaded Image" />
+        <button class="delete-icon" (click)="deleteImage($event)">
+            <i class="fa-solid fa-trash-can" ></i>
+        </button>
+    </div>
+</div>

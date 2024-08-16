@@ -4,6 +4,7 @@ using Application.Services.AreaServices.Command.GetAllQuotationQuery;
 using Application.Services.AreaServices.Command.GetQuotationQuery;
 using Application.Services.AreaServices.Command.UpdateQuotationCommand;
 using Application.Services.Common;
+using Application.Services.QuotationServices.Command.GetQuotationReportQuery;
 using Application.Services.QuotationServices.Queries.GetAutoCode;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,11 @@ namespace NowApi.Controllers
     public class QuotationController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public QuotationController(IMediator mediator)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public QuotationController(IMediator mediator, IWebHostEnvironment webHostEnvironment)
         {
             _mediator = mediator;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         // GET: api/<QuotationController>
@@ -103,6 +106,22 @@ namespace NowApi.Controllers
            CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetAutoCodeRequest() , cancellationToken);
+            if (response is null)
+                return NotFound();
+            return response;
+        }
+        /// <summary>
+        /// Get an item by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the item to fetch record.</param>
+        /// <returns>A response indicating success or failure.</returns>
+        [Route("GetReportDetail")]
+        [HttpGet]
+
+        public async Task<ActionResult<GetQuotationReportResponse>> GetReportDetail(Guid id,
+           CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetQuotationReportRequest() { Id = id, ParentPath = webHostEnvironment.ContentRootPath }, cancellationToken);
             if (response is null)
                 return NotFound();
             return response;

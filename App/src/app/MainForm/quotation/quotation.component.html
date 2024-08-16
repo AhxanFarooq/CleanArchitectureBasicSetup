@@ -8,9 +8,6 @@
       <button type="button" class="btn btn-primary" (click)="AddQuotation()">
         <i class="fa-solid fa-plus"></i> Add Quotation
       </button>
-      <button type="button" class="btn btn-primary" (click)="print()">
-        <i class="fa-solid fa-plus"></i> Print
-      </button>
       
     </div>
   </div>
@@ -19,6 +16,8 @@
   (OnPageChangeEmit)="OnPageChangeEmit($event)"
   (OnEditEmit)="OnEditEmit($event)"
   (OnDeleteEmit)="OnDeleteEmit($event)"
+  (OnPrintEmit)="OnPrintEmit($event)"
   ></app-table>
-  <app-report></app-report>
+  <!-- <app-report [quotationReport]="quotationReport"></app-report> -->
+  <app-quotation-report-multiple-item  [quotationReport]="quotationReport"></app-quotation-report-multiple-item>
 </div>

@@ -1,0 +1,147 @@
+<div class="quotation-container" id="multipleItemReport" >
+
+
+
+    <section class="content">
+      <table style="width: 100%;">
+        <tbody>
+          <tr >
+            <td colspan="2" style="text-align:right !important;padding-top: 8px;">{{quotationReport.TodayDate}}</td>
+          </tr>
+          <tr >
+            <td colspan="2">
+              <span
+                style="font-size: 22px; font-weight: bold; font-family: 'Times New Roman', Times, serif; line-height: normal;">
+                {{quotationReport.CompanyTitle}}
+              </span>
+              <br />
+              <span style="font-family: 'Times New Roman', Times, serif;line-height: normal;">{{quotationReport.Address}}</span>
+              <br />
+              <span style="font-family: 'Times New Roman', Times, serif;line-height: normal;">{{quotationReport.City}}</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: bold; 
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; padding-top: 8px;">
+                Attention:&nbsp;&nbsp;&nbsp;&nbsp;{{quotationReport.Attention}}
+              </p>
+            </td>
+           
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: bold; 
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; padding-top: 8px;">
+                Subject:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quotationReport.Subject}}
+              </p>
+            </td>
+            
+          </tr>
+          <tr >
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: bold; margin-bottom: 0px; 
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; padding-top: 8px;">
+                {{quotationReport.Greeting}}
+              </p>
+            </td>
+          </tr>
+          <tr style="width: 100%;">
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: normal;  margin-bottom: 0px; 
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; padding-top: 8px;">
+                {{quotationReport.Addressing}}
+              </p>
+            </td>
+          </tr>
+          <tr style="width: 100%;">
+            <td colspan="2" [width]="'100%'">
+                <table class="table crm_item_table" >
+                    <thead>
+                        <tr>
+                            <th width="5%" style="text-align: center; padding: 0; margin: 0;">Sr.</th>
+                            <th width="50%" style="text-align: center;  padding: 0; margin: 0;">Description</th>
+                            <th width="45%" style="text-align: center;  padding: 0; margin: 0;">Image</th>
+                            <th width="30%" style="text-align: center;  padding: 0; margin: 0; ">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr  *ngFor="let item of quotationReport.quotationReportItemModels;let i = index">
+                            <td style="text-align: center; ">
+                                {{i + 1}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{item.name}}
+                            </td>
+                            <td style="text-align: center; padding: 12px;">
+                                <img [src]=" 'data:image/png;base64,' + item.imagePath" style="height: 50px; width: 100px; " alt="Logo">
+                            </td>
+                            <td style="text-align: center;">
+                                {{item.lineTotal}}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="3" style="font-size: 20px; font-weight: bold; 
+              font-family: 'Times New Roman', Times, serif;text-align: center;">
+                                <span>Total Amount</span>
+                            </td>
+                            <td>
+                                {{quotationReport.Price}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+          </tr>
+          
+          
+          <tr style="width: 100%;">
+            <td colspan="2">
+              <p style="font-size: 22px; font-weight: bold; padding-top: 32px;
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; text-decoration: underline;" >
+               Terms & Conditions:
+              </p>
+            </td>
+            
+          </tr>
+          <tr style="width: 100%;">
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: normal;
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; " [innerHTML]="quotationReport.TermAndCondition">
+              </p>
+            </td>
+          </tr>
+          <tr style="width: 100%;">
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: normal;
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; ">
+               Thanking and assuring you of complete support!
+              </p>
+            </td>
+          </tr>
+          <tr style="width: 100%;">
+            <td colspan="2">
+              <p style="font-size: 16px; font-weight: normal; padding-top: 16px;
+              font-family: 'Times New Roman', Times, serif;
+               line-height: normal; ">
+               <strong>{{User}}</strong><br />{{UserDesignation}}
+              </p>
+            </td>
+          </tr>
+  
+        </tbody>
+  
+      </table>
+  
+  
+     
+    </section>
+  
+  </div>

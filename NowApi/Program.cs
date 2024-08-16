@@ -2,6 +2,9 @@ using NowApi.Extensions;
 using Application;
 using Persistance.Services;
 using Microsoft.OpenApi.Models;
+using ScheduledTasks.Interface;
+using ScheduledTasks.ScheduledTasks;
+using ScheduledTasks;
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +53,9 @@ builder.Services.BehaviorExtensionService();
 builder.Services.ApplicationExtensionService();
 builder.Services.JwtAuthenticationConfigure();
 builder.Services.PersistanceConfigureService(builder.Configuration);
+
+builder.Services.AddSingleton<IScheduledTask, backup>();
+builder.Services.AddHostedService<SchedulerHostedService>();
 
 var app = builder.Build();
 

@@ -53,6 +53,7 @@ namespace Application.Services.QuotationServices.Command.UpdateQuotationCommand
                 quotation.TermAndCondition = request.TermAndCondition;
                 quotation.Addressing = request.Addressing;
                 quotation.Subject = request.Subject;
+                quotation.Greeting = request.Greeting;
                                                     
                 // Update existing quotation details
                 foreach (var updatedDetailCommand in request.QuotationItemModels)

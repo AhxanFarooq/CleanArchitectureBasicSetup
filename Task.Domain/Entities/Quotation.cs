@@ -21,6 +21,7 @@ namespace Domain.Entities
         public string TermAndCondition { get; set; }
         public string Addressing { get; set; }
         public string Subject { get; set; }
+        public string Greeting { get; set; }
         public string OverallDiscSign { get; set; }
         public string TaxSign { get; set; }
         public virtual ICollection<QuotationItem> QuotationItems { get; set; }

@@ -12,6 +12,7 @@ namespace Application.Repositories
         Task<bool> VerifyAlreadyExist(string companyTitle, CancellationToken cancellationToken);
         Task<string> GetAutoCode( CancellationToken cancellationToken);
         Task<Quotation> GetQuotationByIdWithItem(Guid id, CancellationToken cancellationToken);
+        Task<Quotation> GetQuotationByIdWithDetails(Guid id, CancellationToken cancellationToken);
         Task<List<Quotation>> GetAllQuotationWithItem(CancellationToken cancellationToken);
         Task<List<Quotation>> Search(string search, CancellationToken cancellationToken);
     }

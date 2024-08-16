@@ -24,6 +24,9 @@ export class QuotationService {
   public Delete(id:any):Observable<any>{
     return this.http.delete( `${this.apiUrl}/Quotation/Delete?id=${id}`)
   }
+  public GetReportDetail(id:any):Observable<any>{
+    return this.http.get( `${this.apiUrl}/Quotation/GetReportDetail?id=${id}`)
+  }
 
   public GetAll(pageIndex:number, totalPages:number):Observable<any>{
     return this.http.get(`${this.apiUrl}/Quotation/GetAll?pageIndex=${pageIndex}&totalPages=${totalPages}`);

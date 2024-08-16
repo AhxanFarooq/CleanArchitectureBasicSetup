@@ -1,0 +1,39 @@
+.image-uploader {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;  /* Ensures no overflow from children */
+}
+
+.image-uploader img {
+    max-width: 300px;
+    max-height: 200px;
+    padding: 16px;
+}
+
+.image-uploader .placeholder {
+    color: #aaa;
+    text-align: center;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 5px;   /* Adjusted to show on the border */
+    right: 5px; /* Adjusted to show on the border */
+    background: red; /* Semi-transparent black background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+.delete-icon i {
+    padding: 8px; /* Larger clickable area */
+}
+

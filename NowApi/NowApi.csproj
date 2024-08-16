@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CrystalDecisions.CrystalReports.Engine" Version="1.0.0" />
-    <PackageReference Include="CrystalDecisions.ReportSource" Version="1.0.0" />
-    <PackageReference Include="CrystalDecisions.Shared" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.29">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ScheduledTasks\ScheduledTasks.csproj" />
     <ProjectReference Include="..\Task.Application\Application.csproj" />
     <ProjectReference Include="..\Task.Persistance\Persistance.csproj" />
   </ItemGroup>

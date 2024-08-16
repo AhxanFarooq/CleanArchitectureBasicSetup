@@ -338,7 +338,8 @@ export class Quotation{
     quotationItemModels: QuotationItems[] = [];
     taxSign:string='F';
     overallDiscSign:string='F';
-    addressing:string='Dear Sir';
+    greeting:string='Dear Sir';
+    addressing:string='';
     subject:string='';
 }
 
