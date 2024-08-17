@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using ScheduledTasks.Interface;
 using ScheduledTasks.ScheduledTasks;
 using ScheduledTasks;
+using System.IdentityModel.Tokens.Jwt;
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,10 +49,10 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
 builder.Services.CorsPolicyConfiguration(builder.Configuration,MyAllowSpecificOrigins);
 builder.Services.BehaviorExtensionService();
 builder.Services.ApplicationExtensionService();
-builder.Services.JwtAuthenticationConfigure();
 builder.Services.PersistanceConfigureService(builder.Configuration);
 
 builder.Services.AddSingleton<IScheduledTask, backup>();
@@ -69,7 +70,12 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication();
+app.Use(async (context, next) =>
+{
+    await next();
+    Console.WriteLine($"Response status code: {context.Response.StatusCode}");
+});
 app.UseAuthorization();
 app.UseErrorHandler();
 app.MapControllers();

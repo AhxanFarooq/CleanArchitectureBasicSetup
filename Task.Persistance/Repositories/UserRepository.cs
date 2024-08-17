@@ -15,7 +15,8 @@ namespace Persistance.Repositories
 
         public Task<User> GetUserByEmail(string userName, CancellationToken cancellationToken)
         {
-            return _context.Users.FirstOrDefaultAsync(x=>x.UserName == userName, cancellationToken);
+            // return _context.Users.FirstOrDefaultAsync(x=>x.UserName == userName, cancellationToken);
+            return null;
         }
     }
 }

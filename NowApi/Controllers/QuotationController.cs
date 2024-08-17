@@ -7,6 +7,7 @@ using Application.Services.Common;
 using Application.Services.QuotationServices.Command.GetQuotationReportQuery;
 using Application.Services.QuotationServices.Queries.GetAutoCode;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace NowApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class QuotationController : ControllerBase
     {
         private readonly IMediator _mediator;

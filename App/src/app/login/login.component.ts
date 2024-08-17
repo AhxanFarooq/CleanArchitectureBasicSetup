@@ -21,7 +21,8 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful', response);
         localStorage.setItem('token', response.token)
-        this.router.navigate(['/main']);
+        localStorage.setItem('UserName', this.userData.username)
+        this.router.navigate(['/']);
         // Handle response, store token, navigate or display a message
       },
       error: (error) => {

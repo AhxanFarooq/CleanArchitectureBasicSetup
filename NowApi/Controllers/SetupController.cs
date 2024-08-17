@@ -17,6 +17,7 @@ using Application.Services.ProductServices.Command.GetProductQuery;
 using Application.Services.ProductServices.Command.UpdateProductCommand;
 using Application.Services.UserServices.Queries.GetUserBalance;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -24,6 +25,7 @@ namespace NowApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class SetupController : ControllerBase
     {
         private readonly IMediator _mediator;

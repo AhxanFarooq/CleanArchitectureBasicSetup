@@ -7,8 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class ReportComponent {
   @Input() quotationReport: QuotationReport = new QuotationReport();
-  User:string= 'M. Shahid Imran';
+  User:string  | null= '';
   UserDesignation:string = 'CEO';
+  constructor(){
+    this.User = localStorage.getItem('UserName');
+  }
 }
 
 export class QuotationReport{

@@ -9,6 +9,7 @@ using Application.Services.IndustryServices.Command.DeleteIndustryCommand;
 using Application.Services.IndustryServices.Command.GetAllIndustryQuery;
 using Application.Services.IndustryServices.Command.UpdateIndustryCommand;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
@@ -18,6 +19,7 @@ namespace NowApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class ContactController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -29,7 +31,7 @@ namespace NowApi.Controllers
         // GET: api/<ContactController>
         [Route("GetAll")]
         [HttpGet]
-
+       
         public async Task<ActionResult<PaginatedResponse<GetAllContactResponse>>> GetAll(
            CancellationToken cancellationToken, int pageIndex = 1, int totalPages = 10)
         {

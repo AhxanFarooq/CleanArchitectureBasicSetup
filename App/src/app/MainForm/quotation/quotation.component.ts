@@ -215,10 +215,11 @@ export class QuotationComponent {
         this.quotationReport.quotationReportItemModels = response.quotationReportItemModels;
         setTimeout(() => {
           if(response.isMultipleItem){
+            console.log('Multiple item')
             this.printDownloadService.printReport('multipleItemReport');
           }
           else{
-            
+            console.log('Single item')
             this.printDownloadService.printReport('reportContent');
           }
           

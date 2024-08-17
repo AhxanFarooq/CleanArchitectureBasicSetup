@@ -8,7 +8,10 @@ import { QuotationReport } from '../report.component';
 })
 export class QuotationReportMultipleItemComponent {
   @Input() quotationReport: QuotationReport = new QuotationReport();
-  User:string= 'M. Shahid Imran';
+  User:string  | null= '';
   UserDesignation:string = 'CEO';
+  constructor(){
+    this.User = localStorage.getItem('UserName');
+  }
 }
 

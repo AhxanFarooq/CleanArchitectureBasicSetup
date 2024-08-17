@@ -124,6 +124,7 @@ export class PrintDownloadService {
 
         // Use timeout to ensure rendering happens before print
         setTimeout(() => {
+          console.log('open the print window');
           printWindow.print();
           printWindow.close();
         }, 250);
