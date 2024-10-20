@@ -26,12 +26,21 @@ namespace ScheduledTasks.ScheduledTasks
         }
         public async Task Invoke(CancellationToken cancellationToken)
         {
-            await BackUpAsync("C:\\temp");
+            // Get the path of the Windows directory
+            string windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+
+            // Extract the drive letter
+            string driveLetter = Path.GetPathRoot(windowsPath);
+            await BackUpAsync(driveLetter + "temp");
         }
         public async System.Threading.Tasks.Task BackUpAsync(string path)
         {
             try
             {
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
                 //string filesToDelete = @"*Backup_*.bak";   // Only delete DOC files containing "DeleteMe" in their filenames
                 string[] fileList = System.IO.Directory.GetFiles(path);
                 foreach (string file in fileList)
@@ -45,10 +54,7 @@ namespace ScheduledTasks.ScheduledTasks
                 var backupPath = Path.Combine(path,
                     "Backup_" + datetime.ToString("yyyy'-'MM'-'dd'T'HH'-'mm'-'ss") + ".bak");
 
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
+                
 
                 using (SqlConnection connection =
                     new SqlConnection(Configuration.GetConnectionString("DefaultConnection")))
@@ -70,7 +76,12 @@ namespace ScheduledTasks.ScheduledTasks
             }
             catch (Exception ex)
             {
-                await BackUpAsync("C:\\temp");
+                // Get the path of the Windows directory
+                string windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+
+                // Extract the drive letter
+                string driveLetter = Path.GetPathRoot(windowsPath);
+                await BackUpAsync(driveLetter + "temp");
             }
 
         }
