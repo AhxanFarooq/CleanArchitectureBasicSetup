@@ -48,7 +48,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.CorsPolicyConfiguration(MyAllowSpecificOrigins);
 builder.Services.BehaviorExtensionService();
 builder.Services.ApplicationExtensionService();
-builder.Services.JwtAuthenticationConfigure();
 builder.Services.PersistanceConfigureService(builder.Configuration);
 
 var app = builder.Build();

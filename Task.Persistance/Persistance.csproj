@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Task.Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataContext\" />
+  </ItemGroup>
+
 </Project>
