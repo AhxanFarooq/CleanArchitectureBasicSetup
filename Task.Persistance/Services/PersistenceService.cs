@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Repositories;
 using Persistance.DataContext;
 using Persistance.Repositories;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistance.Services
 {
@@ -15,6 +17,8 @@ namespace Persistance.Services
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
         }
     }
 }
