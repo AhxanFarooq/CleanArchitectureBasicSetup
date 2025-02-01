@@ -9,6 +9,7 @@ namespace Application.Services.Authentication.Queries.LoginQuery
     public record LoginQueryResponce
     {
         public string Token { get; set; } = string.Empty;
+        public int ExpiryTime { get; set; }
         public bool IsSuccess = false;
     }
 }

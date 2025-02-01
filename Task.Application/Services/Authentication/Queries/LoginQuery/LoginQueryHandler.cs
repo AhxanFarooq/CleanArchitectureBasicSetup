@@ -45,15 +45,17 @@ namespace Application.Services.Authentication.Queries.LoginQuery
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, claim));
                 }
-                var token = GenerateToken(authClaims);
+                int second = Convert.ToInt32(_configuration["JWT:ExpiryTime"]);
+                var token = GenerateToken(authClaims, second);
                 return new LoginQueryResponce()
                 {
                     Token = token,
+                    ExpiryTime = second,
                     IsSuccess = true
                 };
         }
 
-        private string GenerateToken(IEnumerable<Claim> claims)
+        private string GenerateToken(IEnumerable<Claim> claims, int second)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
@@ -61,7 +63,7 @@ namespace Application.Services.Authentication.Queries.LoginQuery
             {
                 Issuer = _configuration["JWT:ValidIssuer"],
                 Audience = _configuration["JWT:ValidAudience"],
-                Expires = DateTime.UtcNow.AddHours(3),
+                Expires = DateTime.UtcNow.AddSeconds(second),
                 SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256),
                 Subject = new ClaimsIdentity(claims)
             };
