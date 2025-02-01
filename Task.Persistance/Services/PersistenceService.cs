@@ -17,6 +17,8 @@ namespace Persistance.Services
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IRecommendationRepository, RecommendationRepository>();
 
 
         }

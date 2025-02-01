@@ -16,7 +16,7 @@ namespace Application
     {
         public static void ApplicationExtensionService(this IServiceCollection services)
         {
-            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationExtensions).Assembly));
             services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
 

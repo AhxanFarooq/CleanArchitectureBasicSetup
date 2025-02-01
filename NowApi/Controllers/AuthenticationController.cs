@@ -30,6 +30,8 @@ namespace NowApi.Controllers
 
             var response = await _mediator.Send(loinRequest);
 
+            
+
             return response.Match(
                 login => Ok(response.Value),
                 error => Problem(error)

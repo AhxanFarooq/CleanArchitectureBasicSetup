@@ -1,4 +1,5 @@
-﻿using ErrorOr;
+﻿using Application.Services.Authentication.Queries.LoginQuery;
+using ErrorOr;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -55,6 +56,32 @@ namespace NowApi.Controllers
             {
                 StatusCode = statusCode
             };
+        }
+
+        protected IActionResult SaveTokenToCockies(LoginQueryResponce responce)
+        {
+
+            CookieOptions options = new()
+            {
+                Expires = DateTimeOffset.Now.AddSeconds(responce.ExpiryTime),
+                HttpOnly = true,
+                Path = "/",
+                SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None,
+                Secure = true
+            };
+
+            // Append the token to the response cookies
+            Response.Cookies.Append("session-id", responce.Token, options);
+
+            // Add Partitioned attribute to the Set-Cookie header
+            string setCookieHeader = Response.Headers["Set-Cookie"];
+            if (!string.IsNullOrEmpty(setCookieHeader))
+            {
+                setCookieHeader += "; Partitioned";
+                Response.Headers["Set-Cookie"] = setCookieHeader;
+            }
+
+            return Ok(new { responce.ExpiryTime });
         }
     }
 }

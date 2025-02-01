@@ -14,5 +14,7 @@ namespace Persistance.DataContext
 
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Recommendation> Recommendations { get; set; }
     }
 }
