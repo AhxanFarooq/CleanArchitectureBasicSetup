@@ -9,3 +9,5 @@
 /Task.Persistance/obj/
 /ScheduledTasks/bin/
 /ScheduledTasks/obj/
+/App/.angular
+/App/node_modules

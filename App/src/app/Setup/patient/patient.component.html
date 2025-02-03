@@ -1,0 +1,81 @@
+<div class="container">
+  <!-- Button trigger modal -->
+
+<div class="row my-3">
+  <div class="col-12 d-flex justify-content-between">
+    <input type="text" style="max-width: 250px;" class="form-control mx-2" id="name" [(ngModel)]="searchValue"  placeholder="Search by Name or Code" (input)="search()">
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fa-solid fa-plus"></i> Add Patient
+    </button>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #modalElement id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="code" class="form-label">Code:</label>
+          <input type="text" class="form-control" id="code" [(ngModel)]="newPatient.code" name="code" [disabled]="isViewMode" required>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newPatient.name" name="name" [disabled]="isViewMode" required>
+        </div>
+        <div class="mb-3">
+          <label for="dateOfBirth" class="form-label">DOB:</label>
+          <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="newPatient.dateOfBirth" [disabled]="isViewMode" name="dateOfBirth" required>
+        </div>
+        <div class="mb-3">
+          <label for="contactInfo" class="form-label">Contact Info:</label>
+          <input type="text" class="form-control" id="contactInfo" [(ngModel)]="newPatient.contactInfo"  [disabled]="isViewMode" name="contactInfo" required>
+        </div>
+        <!-- <div class="mb-3">
+          <label for="status" class="form-label">Status:</label>
+          <input type="text" class="form-control" id="status" [(ngModel)]="newPatient.status" status="status" required>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+        <button *ngIf="newPatient.id == '00000000-0000-0000-0000-000000000000'" type="button" class="btn btn-primary" (click)="addPatient()">Save changes</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Contact Info</th>
+            <th style="text-align: end;" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of patients;let i = index">
+            <th style="width: 5%;" scope="row">{{i + 1}}</th>
+            <td style="width: 25%;">{{data.code}}</td>
+            <td style="width: 40%;">{{data.name}}</td>
+            <td style="width: 15%;">{{data.dateOfBirth | date}}</td>
+            <td style="width: 15%;">{{data.contactInfo}}</td>
+            <td style="text-align: end;"><div>
+                <button type="button" class="btn btn-sm btn-secondary me-2" (click)="getPatient(data.id)"><i class="fa-solid fa-eye"></i></button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <app-pagination [hasPrevPage]="hasPrevPage" [hasNextPage]="hasNextPage" [totalItems]="totalCount" (pageChanged)="onPageChange($event)"></app-pagination>
+
+</div>

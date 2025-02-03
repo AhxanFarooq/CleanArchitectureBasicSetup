@@ -40,11 +40,16 @@ namespace NowApi.Controllers
             );
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> GetAllPatient([FromBody] GetAllPatient patient)
+        public async Task<IActionResult> GetAllPatient(string search, int pageIndex, int totalPages)
         {
-            var request = _mapper.Map<GetPatientListQueryRequest>(patient);
+            var request = new GetPatientListQueryRequest()
+            {
+                Search = search,
+                PageIndex = pageIndex,
+                TotalPages = totalPages
+            };
 
             var response = await _mediator.Send(request);
 

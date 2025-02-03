@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   userData = {
-    username: '',
+    email: '',
     password: ''
   };
 
@@ -21,7 +21,7 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful', response);
         localStorage.setItem('token', response.token)
-        this.router.navigate(['/main']);
+        this.router.navigate(['/']);
         // Handle response, store token, navigate or display a message
       },
       error: (error) => {

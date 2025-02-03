@@ -6,22 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
-import { BalanceComponent } from './balance/balance.component';
 import { MainComponent } from './main/main.component';
-import { AreaComponent } from './Setup/area/area.component';
-import { IndustryComponent } from './Setup/industry/industry.component';
+import { PatientComponent } from './Setup/patient/patient.component';
+import { RecommendationComponent } from './Setup/recommendation/recommendation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CompanyComponent } from './MainForm/company/company.component';
-import { AddCompanyComponent } from './MainForm/company/add-company/add-company.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductComponent } from './Setup/product/product.component';
-import { ModalComponent } from './Common/modal/modal.component';
-import { InputComponent } from './Common/input/input.component';
-import { TextareaComponent } from './Common/textarea/textarea.component';
-import { TableComponent } from './Common/table/table.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,28 +21,19 @@ import { TableComponent } from './Common/table/table.component';
     AppComponent,
     LoginComponent,
     SignupComponent,
-    BalanceComponent,
     MainComponent,
-    AreaComponent,
-    IndustryComponent,
+    PatientComponent,
     DashboardComponent,
-    CompanyComponent,
-    AddCompanyComponent,
     PaginationComponent,
-    ProductComponent,
-    ModalComponent,
-    InputComponent,
-    TextareaComponent,
-    TableComponent
+    RecommendationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule ,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

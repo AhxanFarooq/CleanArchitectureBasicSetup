@@ -5,28 +5,28 @@
             <h2>Sign Up</h2>
     <form (ngSubmit)="onSignup()">
         <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" [(ngModel)]="user.userName" name="username">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password">
         </div>
         <div class="mb-3">
-            <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name">
         </div>
         <div class="mb-3">
-            <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" [(ngModel)]="user.address" name="address">
         </div>
         <div class="mb-3">
-            <label for="device" class="form-label">Device</label>
-            <input type="text" class="form-control" id="device" [(ngModel)]="user.device" name="device">
+            <label for="mobile_Phone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="mobile_Phone" [(ngModel)]="user.mobile_Phone" name="mobile_Phone">
         </div>
         <div class="mb-3">
-            <label for="ipAddress" class="form-label">Ip Address</label>
-            <input type="text" class="form-control" id="ipAddress" [(ngModel)]="user.ipAddress" name="ipAddress">
+            <label for="user_Role" class="form-label">Role</label>
+            <input type="text" class="form-control" id="user_Role" [(ngModel)]="user.user_Role" name="user_Role">
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
         <p class="mt-3">Don't have an account? <a routerLink="/login">Sign in here</a></p>

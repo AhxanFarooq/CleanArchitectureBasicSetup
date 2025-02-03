@@ -1,6 +1,7 @@
 // src/app/signup/signup.component.ts
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,15 +10,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent {
   user = {
-    userName: '',
+    email: '',
     password: '',
-    firstName: '',
-    lastName: '',
-    device: '',
-    ipAddress: ''
+    name: '',
+    address: '',
+    mobile_Phone: '',
+    user_Role: ''
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router: Router) {}
 
   onSignup(): void {
     this.authService.signup(this.user).subscribe({
@@ -25,6 +26,7 @@ export class SignupComponent {
         console.log('Signup successful', response);
         alert('Signup Successfully');
         this.resetForm();
+        this.router.navigate(['/login']);
         // Handle successful signup, such as redirecting to a login page or showing a success message
       },
       error: (error) => {
@@ -37,12 +39,12 @@ export class SignupComponent {
 
   resetForm(): void {
     this.user = {
-      userName: '',
+      email: '',
       password: '',
-      firstName: '',
-      lastName: '',
-      device: '',
-      ipAddress: ''
+      name: '',
+      address: '',
+      mobile_Phone: '',
+      user_Role: ''
     };
   }
 }

@@ -9,7 +9,6 @@ namespace NowApi.MapperService
     {
         public PatientMapper() {
             CreateMap<UpsertPatientRequest, PatientCommandRequest>();
-            CreateMap<GetAllPatient, GetPatientListQueryRequest>();
         }
     }
 }

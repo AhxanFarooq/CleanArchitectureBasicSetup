@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl = environments.apiUrl + '/User';  // Adjust the API URL accordingly
+  private apiUrl = environments.apiUrl + '/Authentication';  // Adjust the API URL accordingly
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -20,14 +20,11 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
   signup(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/SignUp`, user);
+    return this.http.post(`${this.apiUrl}/Register`, user);
   }
 
   login(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/authenticate`, user);
+    return this.http.post(`${this.apiUrl}/Login`, user);
   }
 
-  getBalance(getBalance: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/balance`, getBalance);
-  }
 }

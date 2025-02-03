@@ -42,12 +42,15 @@ namespace NowApi.Controllers
             );
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> GetAll([FromBody] GetAllRecommendation recommendation)
+        public async Task<IActionResult> GetAll(int pageIndex, int totalPages)
         {
-            var request = _mapper.Map< GetRecommendationListQueryRequest >(recommendation);
-
+            var request = new GetRecommendationListQueryRequest()
+            {
+                PageIndex = pageIndex,
+                TotalPages = totalPages
+            };
             var response = await _mediator.Send(request);
 
             return response.Match(

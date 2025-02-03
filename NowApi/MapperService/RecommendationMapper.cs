@@ -10,7 +10,6 @@ namespace NowApi.MapperService
         public RecommendationMapper()
         {
             CreateMap<UpsertRecommendation, RecommendationCommandRequest>();
-            CreateMap<GetAllRecommendation, GetRecommendationListQueryRequest>();
         }
     }
 }

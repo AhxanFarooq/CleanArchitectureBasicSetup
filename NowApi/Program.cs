@@ -6,7 +6,19 @@ string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.CorsPolicyConfiguration(MyAllowSpecificOrigins);
+//builder.Services.CorsPolicyConfiguration(MyAllowSpecificOrigins);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        builder1 =>
+        {
+
+            //builder.WithOrigins(Configuration.GetSection("frontend:IpAndServerAddress").Value, "app://.").AllowAnyMethod()
+            //.AllowAnyHeader();
+
+            builder1.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+        });
+});
 builder.Services.BehaviorExtensionService();
 builder.Services.ApplicationExtensionService();
 builder.Services.PersistanceConfigureService(builder.Configuration);
