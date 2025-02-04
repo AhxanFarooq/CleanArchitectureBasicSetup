@@ -15,9 +15,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
-    // Implement logic to check if user is logged in
-    // For example, you can check if there is a token in local storage
-    return !!localStorage.getItem('token');
+    const tokenData = sessionStorage.getItem('authToken');
+    if (!tokenData) return false;
+
+    const parsedToken = JSON.parse(tokenData);
+    if (new Date().getTime() > parsedToken.expiry) {
+      sessionStorage.removeItem('authToken') // Token expired, remove it
+      return false;
+    }
+
+    return true;
   }
   signup(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/Register`, user);

@@ -13,8 +13,10 @@ export class SetupService {
 
   }
 
+
+
   public Create(formName: string, setupDate:any):Observable<any>{
-    const token = localStorage.getItem('token');
+    const token = this.GetToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -24,7 +26,7 @@ export class SetupService {
 
   public GetAll(formName:string, pageIndex:number, totalPages:number):Observable<any>{
     const search = '';
-    const token = localStorage.getItem('token');
+    const token = this.GetToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -33,7 +35,7 @@ export class SetupService {
   }
 
   public GetById(formName:string, id:any):Observable<any>{
-    const token = localStorage.getItem('token');
+    const token = this.GetToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -41,12 +43,28 @@ export class SetupService {
     return this.http.get(`${this.apiUrl}/${formName}/GetById?id=${id}`, {headers});
   }
   public Search(formName:string, search:string, pageIndex:number, totalPages:number):Observable<any>{
-    const token = localStorage.getItem('token');
+    //var data = GetToken();
+    const token = this.GetToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.apiUrl}/${formName}/GetAll?search=${search}&pageIndex=${pageIndex}&totalPages=${totalPages}`, {headers});
+  }
+
+  private GetToken() : string | null{
+
+    const tokenData = sessionStorage.getItem('authToken');
+    if (!tokenData) return null;
+
+    const parsedToken = JSON.parse(tokenData);
+    if (new Date().getTime() > parsedToken.expiry) {
+      sessionStorage.removeItem('authToken')
+      return null;
+    }
+    return parsedToken.value;
+
+
   }
 
 }

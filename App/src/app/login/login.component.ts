@@ -20,9 +20,8 @@ export class LoginComponent {
     this.authService.login(this.userData).subscribe({
       next: (response) => {
         console.log('Login successful', response);
-        localStorage.setItem('token', response.token)
+        this.setToken(response.token, response.expiryTime);
         this.router.navigate(['/']);
-        // Handle response, store token, navigate or display a message
       },
       error: (error) => {
         console.error('Login failed', error);
@@ -30,5 +29,13 @@ export class LoginComponent {
         // Handle error
       }
     });
+  }
+  setToken(token: string, expiryInMinutes: number): void {
+    const expiryTime = new Date().getTime() + expiryInMinutes * 60 * 1000; // Convert minutes to milliseconds
+    const tokenData = {
+      value: token,
+      expiry: expiryTime
+    };
+    sessionStorage.setItem('authToken', JSON.stringify(tokenData));
   }
 }

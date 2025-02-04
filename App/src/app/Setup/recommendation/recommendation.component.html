@@ -31,8 +31,19 @@
           </div>
           <div class="mb-3">
             <label for="status" class="form-label">Status:</label>
-            <input type="text" class="form-control" id="status" [(ngModel)]="newRecommendation.status" name="status" >
+            <select class="form-select" [(ngModel)]="newRecommendation.status" aria-placeholder="Select Status">
+              <option  [value]="'InComplete'"> In Complete</option>
+              <option  [value]="'Pending'"> Pending</option>
+              <option  [value]="'Completed'"> Completed</option>
+          </select>
           </div>
+          <div class="mb-3">
+            <label>Patient:</label>
+            <select class="form-select" [(ngModel)]="newRecommendation.patientId" aria-placeholder="Select Patient">
+                <option *ngFor="let patient of patients" [value]="patient.id">{{ patient.name }}</option>
+            </select>
+            <!-- <input [(ngModel)]="newContact.city" placeholder="Area" class="form-control" type="text"> -->
+        </div>
 
         </div>
         <div class="modal-footer">
@@ -60,7 +71,7 @@
               <td style="width: 40%;">{{recommendation.dueDate | date}}</td>
               <td style="width: 15%;">{{recommendation.status}}</td>
               <td style="text-align: end;"><div>
-                  <!-- <button type="button" class="btn btn-sm btn-secondary me-2" (click)="getRecommendation(recommendation.id)"><i class="fa-solid fa-pen-to-square"></i></button> -->
+                  <button type="button" class="btn btn-sm btn-secondary me-2" (click)="UpdateStatus(recommendation.id)">Update Status</button>
                   <!-- <button type="button" class="btn btn-sm btn-danger" (click)="deleteRecommendation(recommendation.id)"><i class="fa-solid fa-trash-can"></i></button> -->
               </div></td>
             </tr>

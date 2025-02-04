@@ -1,6 +1,7 @@
 import { Component, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import {SetupService} from '../../services/setup.service'
 import Swal from 'sweetalert2';
+import { Patient } from '../patient/patient.component';
 
 @Component({
   selector: 'app-recommendation',
@@ -11,7 +12,7 @@ export class RecommendationComponent {
   @ViewChild('modalElement')
   modalElement!: ElementRef;
   recommendations: Recommendation[] = []; // Initialize with sample data or fetch from a service
-  newRecommendation: Recommendation = {id:'', type: '', dueDate: '', status: '', patientId:'' };
+  newRecommendation: Recommendation = {id:'00000000-0000-0000-0000-000000000000', type: '', dueDate: '', status: '', patientId:'' };
   searchValue:string='';
   totalPages:number = 10;
   pageIndex:number = 1;
@@ -19,11 +20,13 @@ export class RecommendationComponent {
   hasPrevPage:boolean = false;
   hasNextPage:boolean = false;
   private modalInstance: any;
+  patients: Patient[] = [];
 
   constructor(private setupService: SetupService,private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.fetchRecommendations()
+    this.fetchPatients();
     // Initialize recommendations array with sample data or fetch from a service
   }
   onPageChange(pageIndex: number): void {
@@ -81,6 +84,35 @@ export class RecommendationComponent {
     });
   }
 
+  UpdateStatus(id:any){
+    var data = this.recommendations.find(x=>x.id == id);
+
+    if(data){
+      data.status = 'Completed';
+      this.setupService.Create("Recommendation",data).subscribe({
+        next: () => {
+          Swal.fire({
+            title: "Saved!",
+            text: "Updated status successfully!",
+            icon: "success"
+          });
+          this.close();
+          this.clearObject();
+          this.fetchRecommendations();
+          // Handle response, store token, navigate or display a message
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Something went wrong?',
+            text: error,
+            icon: 'error'
+          })
+          // Handle error
+        }
+      });
+    }
+  }
+
 
   close() {
     this.modalInstance.hide();
@@ -119,7 +151,7 @@ export class RecommendationComponent {
     });
   }
   clearObject(){
-    this.newRecommendation.id = '';
+    this.newRecommendation.id = '00000000-0000-0000-0000-000000000000';
     this.newRecommendation.type = '';
     this.newRecommendation.dueDate = '';
     this.newRecommendation.status = '';
@@ -147,11 +179,34 @@ export class RecommendationComponent {
     });
   }
 
+  fetchPatients() {
+      this.setupService.GetAll("Patient", this.pageIndex, this.totalPages).subscribe({
+        next: (response) => {
+          this.patients = response.items.map((data: Patient)=>({
+            id: data.id,
+            code: data.code,
+            name: data.name,
+            dateOfBirth: data.dateOfBirth,
+            contactInfo: data.contactInfo,
+            status: data.status,
+          }))
+          // Handle response, store token, navigate or display a message
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Something went wrong?',
+            text: error.error.error,
+            icon: 'error'
+          })
+        }
+      });
+    }
+
 
 }
 
 export class Recommendation{
-  id:string = ''
+  id:string = '00000000-0000-0000-0000-000000000000'
   type:string = ''
   dueDate:string =''
   status:string= ''

@@ -71,7 +71,7 @@ namespace NowApi.Controllers
             };
 
             // Append the token to the response cookies
-            Response.Cookies.Append("session-id", responce.Token, options);
+            Response.Cookies.Append("token", responce.Token, options);
 
             // Add Partitioned attribute to the Set-Cookie header
             string setCookieHeader = Response.Headers["Set-Cookie"];
